@@ -5,13 +5,17 @@ import { Col, Row } from 'react-bootstrap';
 
 function MainMenuButtons(){
     return (
-    <Container className='MainMenuButtons'>
-        <Row><Col xs={6}>
-          <Button block>To Buy Lists</Button>
-          </Col></Row>
-        <Row><Button>Shopping Lists</Button></Row>
-        <Row><Button>Went shopping</Button></Row>
-    </Container>);
+    <div className='MainMenuButtons container container-fluid'>
+        <div className='row'>
+            <button className='btn btn-primary btn-block' >To Buy Lists</button>
+        </div>
+        <div className='row'>
+          <button className='btn btn-primary btn-block' >Shopping Lists</button>
+        </div>
+        <div className='row'>
+          <button className='btn btn-primary btn-block' >Went shopping</button>
+        </div>
+    </div>);
 }
 
 export default MainMenuButtons;

@@ -1,0 +1,10 @@
+.App {
+    text-align: center;
+  }
+  
+  .AppHeader .MainMenuButtons .menuButtonBar {
+    width: 30px;
+    height: 5px;
+    margin: 6px 0px;
+    background-color: black;
+  }
