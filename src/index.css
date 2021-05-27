@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Andale Mono, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -14,11 +12,31 @@ code {
 
 .App {
   text-align: center;
+  max-width: 920px;
+  background-color: #1d212c;
 }
 
-.AppHeader .MainMenuButtons .menuButtonBar {
+h1{
+  color: rgb(254, 255, 241);
+}
+
+.AppHeader .DropDownMenuButton .menuButtonBar {
   width: 30px;
   height: 5px;
   margin: 6px 0px;
   background-color: black;
+}
+
+.MainMenuButtons{
+  padding-top: 3em;
+}
+
+.MainMenuButtons button{
+  height: 5em;
+  margin-bottom: 5px;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-color: deepskyblue;
+  background-color: #202531;
+  color: white;
 }

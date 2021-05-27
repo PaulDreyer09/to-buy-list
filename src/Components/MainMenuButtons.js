@@ -7,13 +7,13 @@ function MainMenuButtons(){
     return (
     <div className='MainMenuButtons container container-fluid'>
         <div className='row'>
-            <button className='btn btn-primary btn-block' >To Buy Lists</button>
+            <button className='btn btn-block' >To Buy Lists</button>
         </div>
         <div className='row'>
-          <button className='btn btn-primary btn-block' >Shopping Lists</button>
+          <button className='btn btn-block' >Shopping Lists</button>
         </div>
         <div className='row'>
-          <button className='btn btn-primary btn-block' >Went shopping</button>
+          <button className='btn btn-block' >Went shopping</button>
         </div>
     </div>);
 }

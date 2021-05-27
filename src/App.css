@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #1d212c;
 }
 
 .DropDownMenuButton {
@@ -10,8 +11,8 @@
 }
 
 .MainMenuButtons button :nth-child(1) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .MainMenuButtons button :nth-child(3) {

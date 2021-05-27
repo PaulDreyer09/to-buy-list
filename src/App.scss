@@ -1,24 +1,28 @@
+$dropDownMenuButtonStripeColors: black;
+$backgroundColorMain: #1d212c;
+
 .App {
   text-align: center;
+  background-color: $backgroundColorMain;
 }
 
 .DropDownMenuButton{
       width: 30px;
       height: 5px;
       margin: 6px 0px;
-      background-color: black;
+      background-color: $dropDownMenuButtonStripeColors;
 }
 
 .MainMenuButtons{
   button{
     :nth-child(1){
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important; 
     }
     :nth-child(3){
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-
   }
 }
+
