@@ -1,12 +1,11 @@
-let wishLists = [{name: 'Groceries'},
-{name: 'Cloths'},
-{name: 'Tools'},
-{name: 'Games'}];
+import ToBuyList from './ToBuyList'
 
-let ToBuyListsPage = () => (
+
+
+const ToBuyListsPage = (props) => 
     <div className='ToBuyListsPage'>
-        {wishLists.map((list) => (<h3>list.name</h3>))}
+        {props.lists.map((list) => (<ToBuyList name={list.name} listItems={list.items}></ToBuyList>))}
     </div>
-);
+
 
 export default ToBuyListsPage;

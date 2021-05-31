@@ -11,6 +11,7 @@ code {
 }
 
 .App {
+  margin: 0 auto;
   text-align: center;
   color:linen;
   max-width: 920px;
@@ -40,4 +41,9 @@ h1{
   border-color: deepskyblue;
   background-color: #202531;
   color: white;
+}
+
+
+.ToBuyList h4{
+  text-align: left;
 }
