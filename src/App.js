@@ -14,10 +14,10 @@ function App() {
   const [title, setTitle] = useState('To Buy Lists')
   //List items for ToBuyListPage TEST use before adding database
   const [toBuyLists, setToBuyLists] = useState(
-    [{name: 'Groceries', items: [{name:'Apples', quantity: 2}, {name:'Bananas', quantity: 2}]},
-                {name: 'Cloths', items: [{name:'Steel Point Boots', quantity: 1}, {name:'Cargo Shorts', quantity: 2}]},
-                {name: 'Tools', items: [{name:'Makita Cordless SDS Drill', quantity: 1}, {name:'10mm SDS Drill bit', quantity: 2}]},
-                {name: 'Games', items: [{name:'Age of Empires IV', quantity: 2}, {name:'Starcraft Remastered HD', quantity: 2}]}]
+    [{id: 'l0', name: 'Groceries', items: [{id: 1, name:'Apples', quantity: 2}, {id: 2, name:'Bananas', quantity: 2}]},
+                {id: 'l2', name: 'Cloths', items: [{id: 3, name:'Steel Point Boots', quantity: 1}, {id: 4, name:'Cargo Shorts', quantity: 2}]},
+                {id: 'l3', name: 'Tools', items: [{id: 5, name:'Makita Cordless SDS Drill', quantity: 1}, {id: 6, name:'10mm SDS Drill bit', quantity: 2}]},
+                {id: 'l4', name: 'Games', items: [{id: 7, name:'Age of Empires IV', quantity: 2}, {id: 8, name:'Starcraft Remastered HD', quantity: 2}]}]
 
   );
 

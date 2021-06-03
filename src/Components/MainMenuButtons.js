@@ -6,15 +6,9 @@ import { Col, Row } from 'react-bootstrap';
 function MainMenuButtons(props){
     return (
     <div className='MainMenuButtons container container-fluid'>
-        <div className='row'>
-            <button onClick={props.handleTBLMainMenuButton} className='btn btn-block' >To Buy Lists</button>
-        </div>
-        <div className='row'>
-          <button className='btn btn-block' >Shopping Lists</button>
-        </div>
-        <div className='row'>
-          <button className='btn btn-block' >Went shopping</button>
-        </div>
+        <a onClick={props.handleTBLMainMenuButton} className='btn-block mainMenuButton' >To Buy Lists</a>
+        <a className='btn-block mainMenuButton' >Shopping Lists</a>        
+        <a className='btn-block mainMenuButton' >Went shopping</a>        
     </div>);
 }
 
