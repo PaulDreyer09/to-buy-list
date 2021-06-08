@@ -49,8 +49,6 @@ h1{
 .AppHeader .DropDownMenuButton{
   max-width: 33px;
   padding: 4px 2px;
-  background-color: #739EFF;
-  box-shadow: 2px 2px 5px #678adb;
 }
 
 .AppHeader .DropDownMenuButton .menuButtonBar {
