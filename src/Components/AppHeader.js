@@ -5,10 +5,9 @@ import { Col, Row } from 'react-bootstrap';
 
 function AppHeader(props){
     return (
-        <div fluid className="AppHeader container">
+        <div className="AppHeader container">
             <div>
-                <span><DropDownMenuButton/></span>
-                
+                <span><DropDownMenuButton/></span>                
             </div>
             <div>
                 <h1>{props.title}</h1>

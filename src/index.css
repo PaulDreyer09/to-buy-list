@@ -18,7 +18,9 @@ code {
   background-color: #383B4F;
 }
 
-
+.button{
+  cursor: pointer;
+}
 
 
 
@@ -105,7 +107,7 @@ h1{
 
 .ToBuyList{
   box-sizing: border-box;
-  padding: 5px 0;
+  padding: 5px 2em;
   margin-bottom: 1em;
   border-radius: 10px;
   background-image: linear-gradient(90deg, #616682, #3B3B52);
@@ -114,14 +116,37 @@ h1{
 
 
 .ToBuyList h4{
+  display: inline-block;
   text-align: left;
-  padding: 0 1em;
+  padding: 0;
   text-shadow: 2px 1px 10px #000;
 }
 
+.ToBuyList .listHeader i{
+  font-size: 130%;
+  line-height: 1.8em;
+  text-shadow: 0 0 10px white;
+}
+
+.ToBuyList .addItemButton{  
+  height: 2em;
+  line-height: 2em;
+  margin: 0 0em;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #444;
+  box-shadow: 1px 1px 3px #aaa;
+}
+
+.ToBuyList .listContent{
+  width: 100%;
+}
+
 .ListItem{
+  display: block;
   text-align: left;
-  padding: 5px 2em;  
+  padding: 5px 0;  
   margin: 0 1em 0 1em;
   
   
