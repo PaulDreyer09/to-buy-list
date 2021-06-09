@@ -23,12 +23,12 @@ class UI extends Component{
     }
     handleTBLMainMenuButton = () => { this.setState({activity: 'To_Buy_Lists'}) };  
     addMethod(){
-
+        console.log('Hey man did you just try to add something?');
     }
     handleTBLAddItemButton = (id) => {
+        //This method returns another method so each button has its own method that points directly to its list
         return () => { 
-            //Change displayForm to false for the list containing the clicked button
-            //This method returns another method so each button has its own method that points directly to its list
+            //Change displayForm to false for the list containing the clicked button            
             let index = this.state.toBuyLists.findIndex(x => x.id === id);
             if(index !== -1){
                 let temp = this.state.toBuyLists[index];
@@ -41,6 +41,9 @@ class UI extends Component{
             }
         }
     };
+    handleTBLSubmitItemButton = () => {
+        this.addMethod();
+    }
 
     
     render(){
@@ -50,6 +53,7 @@ class UI extends Component{
                 <ContentPage activity={this.state.activity} toBuyLists={this.state.toBuyLists} 
                     handleTBLMainMenuButton={this.handleTBLMainMenuButton}
                     handleTBLAddItemButton={ () => this.handleTBLAddItemButton}
+                    handleTBLSubmitItemButton={() => this.handleTBLSubmitItemButton}
                 /> 
             </div>
         )
