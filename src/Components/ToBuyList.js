@@ -41,9 +41,10 @@ const ToBuyList = (props) => {
                 listIndex={props.listIndex} 
                 itemIndex={index} 
                 listItem={listItem} 
-                handleDeleteTblListItem={props.handleDeleteTblListItem}/>))}
+                handleDeleteTblListItem={props.handleDeleteTblListItem}
+                toggleImportant={props.toggleImportant}/>))}
             </div>
-            : ''
+            : 'No items to show'
             }
             
             

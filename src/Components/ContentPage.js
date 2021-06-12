@@ -9,7 +9,8 @@ function ContentPage(props){
                 <ToBuyListsPage lists={props.toBuyLists} 
                 handleTBLAddItemButton={props.handleTBLAddItemButton}
                 handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
-                handleDeleteTblListItem={props.handleDeleteTblListItem}/> : 
+                handleDeleteTblListItem={props.handleDeleteTblListItem}
+                toggleImportant={props.toggleImportant}/> : 
                 <div className='Placeholder for last activity'></div>))}
  
         </div>        

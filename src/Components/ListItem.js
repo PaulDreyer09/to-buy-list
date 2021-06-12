@@ -1,6 +1,8 @@
 const ListItem = (props) => {
+    //console.log(props.toggleImportant(props.listIndex, props.itemIndex));
     return( 
-    <div className='ListItem'>        
+    <div onDoubleClick={() => props.toggleImportant(props.listIndex, props.itemIndex)} className='ListItem'>        
+        {props.listItem.important ? <i className='fa fa-star'></i>: ''}
         <span>{props.listItem.name}</span>
         <div className='itemOptions'>
             <a href='#' className='addButton'><i className='fa fa-edit icon'></i></a>

@@ -22,6 +22,7 @@ class UI extends Component{
         };
 
     }
+    
     handleTBLMainMenuButton = () => { this.setState({activity: 'To_Buy_Lists'}) };  
     addMethod(){
         console.log('Hey man did you just try to add something?');

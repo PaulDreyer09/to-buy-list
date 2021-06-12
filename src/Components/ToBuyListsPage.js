@@ -9,7 +9,8 @@ const ToBuyListsPage = (props) => {
                 list={list} 
                 handleTBLAddItemButton={props.handleTBLAddItemButton}
                 handleSubmitItemButton={props.handleTBLSubmitItemButton}
-                handleDeleteTblListItem={props.handleDeleteTblListItem}></ToBuyList>))}
+                handleDeleteTblListItem={props.handleDeleteTblListItem}
+                toggleImportant={props.toggleImportant}></ToBuyList>))}
     </div>);
     }
 
