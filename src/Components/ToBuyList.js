@@ -5,7 +5,7 @@ const ToBuyList = (props) => {
     let list = useRef();
     let addToList = () => {
         props.handleTBLSubmitItemButton()();
-
+        
         /*
             We stopped here
             Need to make this function accept parameters for the item and try to make it a normal function call from here
@@ -16,7 +16,7 @@ const ToBuyList = (props) => {
             <div className='listHeader row'>
                 <h4 className='col-8'>{props.list.name}</h4>
                 
-                <a onClick={props.handleTBLAddItemButton(props.list.id)} className='addItemButton col-3 button'>
+                <a onClick={() => props.handleTBLAddItemButton(props.list.id)} className='addItemButton col-3 button'>
                     Add Item
                 </a>
                 <i className='fa fa-angle-down col-1 button'></i>
@@ -34,9 +34,18 @@ const ToBuyList = (props) => {
                     </div>
                     : <></>
             }
+            {props.list.items.length > 0 ? 
             <div className='listContent'>
-                {props.list.items.map((listItem, index) => (<ListItem key={index} listItem={listItem}/>))}
+                {props.list.items.map((listItem, index) => (<ListItem 
+                key={index} 
+                listIndex={props.listIndex} 
+                itemIndex={index} 
+                listItem={listItem} 
+                handleDeleteTblListItem={props.handleDeleteTblListItem}/>))}
             </div>
+            : ''
+            }
+            
             
             
         </div>);

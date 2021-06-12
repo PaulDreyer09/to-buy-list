@@ -18,6 +18,7 @@ class UI extends Component{
                 {id: 'l2', name: 'Cloths', displayForm: false, items: [{id: 3, name:'Steel Point Boots', quantity: 1}, {id: 4, name:'Cargo Shorts', quantity: 2}]},
                 {id: 'l3', name: 'Tools', displayForm: false, items: [{id: 5, name:'Makita Cordless SDS Drill', quantity: 1}, {id: 6, name:'10mm SDS Drill bit', quantity: 2}]},
                 {id: 'l4', name: 'Games', displayForm: false, items: [{id: 7, name:'Age of Empires IV', quantity: 2}, {id: 8, name:'Starcraft Remastered HD', quantity: 2}]}],
+            
         };
 
     }
@@ -25,24 +26,39 @@ class UI extends Component{
     addMethod(){
         console.log('Hey man did you just try to add something?');
     }
-    handleTBLAddItemButton = (id) => {
-        //This method returns another method so each button has its own method that points directly to its list
-        return () => { 
-            //Change displayForm to false for the list containing the clicked button            
-            let index = this.state.toBuyLists.findIndex(x => x.id === id);
-            if(index !== -1){
-                let temp = this.state.toBuyLists[index];
-                let tempList = this.state.toBuyLists;
-                temp.displayForm = true;
-                tempList[index] = temp;
-                this.setState({toBuyLists: tempList});
-            }else{
-                console.log('Dude what did you click?');
-            }
-        }
+    handleTBLAddItemButton = (id) => {        
+            //Change displayForm to false for the list containing the clicked button
+            console.log(`add ${id}`);
+
+            // let index = this.state.toBuyLists.findIndex(x => x.id === id);
+            // if(index !== -1){
+            //     let temp = this.state.toBuyLists[index];
+            //     let tempList = this.state.toBuyLists;
+            //     temp.displayForm = true;
+            //     tempList[index] = temp;
+            //     this.setState({toBuyLists: tempList});
+            // }else{
+            //     console.log('Dude what did you click?');
+            // }        
     };
-    handleTBLSubmitItemButton = () => {
+
+    //Submit new ListItem to a ToBuyList
+    handleTblSubmitItemButton = () => {
         this.addMethod();
+    }
+
+    //Delete ListItem from ToBuyList
+    handleDeleteTblListItem = (listId, itemId) => {
+        let lists = this.state.toBuyLists;
+        
+        let targetList = lists[listId];
+        console.log(targetList);
+        targetList.items.splice(itemId, 1);
+        console.log(targetList);
+        lists[listId] = targetList
+        this.setState({toBuyLists: lists});
+
+        console.log('delete', listId);
     }
 
     
@@ -52,7 +68,8 @@ class UI extends Component{
                 <AppHeader title={this.state.title}/>
                 <ContentPage activity={this.state.activity} toBuyLists={this.state.toBuyLists} 
                     handleTBLMainMenuButton={this.handleTBLMainMenuButton}
-                    handleTBLAddItemButton={ () => this.handleTBLAddItemButton}
+                    handleTBLAddItemButton={this.handleTBLAddItemButton}
+                    handleDeleteTblListItem={this.handleDeleteTblListItem}
                     handleTBLSubmitItemButton={() => this.handleTBLSubmitItemButton}
                 /> 
             </div>
