@@ -6,6 +6,7 @@ import AppHeader from './Components/AppHeader';
 import ContentPage from './Components/ContentPage';
 
 import React, {useState} from 'react';
+import ToBuyList from './Components/ToBuyList';
 
 function App() {
   const [activity, setActivity] = useState('Main_Menu');//activity keeps track of the page that needs to be shown
@@ -14,10 +15,10 @@ function App() {
   const [title, setTitle] = useState('To Buy Lists');
 
   const [toBuyLists, setToBuyLists] = useState([   //List items for ToBuyListPage TEST use before adding database
-    {id: 'l0', name: 'Groceries', displayForm: false, items: [{id: 1, name:'Apples', quantity: 2, important: false}, {id: 2, name:'Bananas', quantity: 2, important: false}]},]);
-    // {id: 'l2', name: 'Cloths', displayForm: false, items: [{id: 3, name:'Steel Point Boots', quantity: 1}, {id: 4, name:'Cargo Shorts', quantity: 2}]},
-    // {id: 'l3', name: 'Tools', displayForm: false, items: [{id: 5, name:'Makita Cordless SDS Drill', quantity: 1}, {id: 6, name:'10mm SDS Drill bit', quantity: 2}]},
-    // {id: 'l4', name: 'Games', displayForm: false, items: [{id: 7, name:'Age of Empires IV', quantity: 2}, {id: 8, name:'Starcraft Remastered HD', quantity: 2}]}]);
+    {id: 'l0', name: 'Groceries', displayForm: false, items: [{id: 1, name:'Apples', quantity: 2, important: false}, {id: 2, name:'Bananas', quantity: 2, important: false}]},
+     {id: 'l2', name: 'Cloths', displayForm: false, items: [{id: 3, name:'Steel Point Boots', quantity: 1}, {id: 4, name:'Cargo Shorts', quantity: 2}]},
+     {id: 'l3', name: 'Tools', displayForm: false, items: [{id: 5, name:'Makita Cordless SDS Drill', quantity: 1}, {id: 6, name:'10mm SDS Drill bit', quantity: 2}]},
+     {id: 'l4', name: 'Games', displayForm: false, items: [{id: 7, name:'Age of Empires IV', quantity: 2}, {id: 8, name:'Starcraft Remastered HD', quantity: 2}]}]);
 
   const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
 
@@ -31,8 +32,22 @@ function App() {
   };
 
   //Submit new ListItem to a ToBuyList
-  const handleTBLSubmitItemButton = () => {
-      this.addMethod();
+  const handleTBLSubmitItemButton = (listId, name) => {
+    console.log('listID', listId);
+      if(name === '')
+          {alert('Please enter a name')}
+      else{
+        
+        let lists = [...toBuyLists];
+        let targetList = lists[listId];
+        
+        console.log(targetList);
+        
+        targetList.items.push({id: 0, name: name});
+        lists[listId] = targetList;
+
+        setToBuyLists(lists);
+      }
       
   }
 
@@ -64,7 +79,7 @@ function App() {
                   handleTBLMainMenuButton={handleTBLMainMenuButton}
                   handleTBLAddItemButton={handleTBLAddItemButton}
                   handleDeleteTblListItem={handleDeleteTblListItem}
-                  handleTBLSubmitItemButton={() => handleTBLSubmitItemButton}
+                  handleTBLSubmitItemButton={handleTBLSubmitItemButton}
                   toggleImportant={toggleImportant}
               /> 
           </div>
