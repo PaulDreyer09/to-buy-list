@@ -34,8 +34,9 @@ function App() {
           if(item == null){
             console.log("Eh something went wrong getting the lists");
           }
-          if(item.listId === list.id){
+          if(item.listId == list.id){
             listItems.push({
+              id: item.id,
               name: item.name, 
               quantity: item.quantity, 
               important: item.important}
@@ -68,26 +69,51 @@ function App() {
     return data;
   }
 
-  const addListItem = (listId, listItem) => {
-    let lists = [...toBuyLists];
-    let targetList = lists[listId];    
+  const addListItem = async (listId, listItem) => {
+    // let lists = [...toBuyLists];
+    // let targetList = lists[listId];    
     
-    targetList.items.push(listItem);
-    lists[listId] = targetList;
+    // targetList.items.push(listItem);
+    // lists[listId] = targetList;
+
+    // setToBuyLists(lists);
+
+    const newItem = {listId: listId, ...listItem};
+    const res = await fetch('http://localhost:5000/listItems', {
+      method: 'POST',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify(newItem)
+    });
+
+    const data = await res.json();
+    console.log(data);
+    
+    //Add task to list
+    let lists = [...toBuyLists];
+    lists[listId].items.push({
+      id: data.id,
+      name: data.name,
+      quantity: data.quantity,
+      important: data.important });
+    
+      setToBuyLists(lists);
+
+  }
+  
+  const deleteListItem = async (listIndex, listItemId) => {
+    await fetch(`http://localhost:5000/listItems/${listItemId}`, {method: 'DELETE'});
+    let lists = [...toBuyLists];
+    let targetList = lists[listIndex].items;
+
+    lists[listIndex].items = targetList.filter((listItem) => (listItem.id != listItemId));
 
     setToBuyLists(lists);
   }
 
   const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
 
-  const handleTBLAddItemButton = (id) => {        
-          //Change displayForm to false for the list containing the clicked button
-          console.log(`add ${id}`);     
-  };
-
   //Submit new ListItem to a ToBuyList
   const handleTBLSubmitItemButton = (listId, {id, name, quantity, important}) => {
-    console.log('listID', listId);
       if(!name)
           {alert('Please enter a name')}
       addListItem(listId, {id: id, name: name, quantity: quantity, important: important})
@@ -95,10 +121,9 @@ function App() {
   }
 
   //Delete ListItem from ToBuyList
-  const handleDeleteTblListItem = (listIndex, itemIndex) => {
-      let lists = [...toBuyLists];      
-      lists[listIndex].items.splice(itemIndex, 1);      
-      setToBuyLists(lists);
+  const handleDeleteTblListItem = (listIndex, listItemIndex) => {
+      const listItemId = toBuyLists[listIndex].items[listItemIndex].id;
+      deleteListItem(listIndex, listItemId);
   };
 
   //Toggle item being important to show a star next to the item name
@@ -120,7 +145,6 @@ function App() {
               <AppHeader title={title}/>
               <ContentPage activity={activity} toBuyLists={toBuyLists} 
                   handleTBLMainMenuButton={handleTBLMainMenuButton}
-                  handleTBLAddItemButton={handleTBLAddItemButton}
                   handleDeleteTblListItem={handleDeleteTblListItem}
                   handleTBLSubmitItemButton={handleTBLSubmitItemButton}
                   toggleImportant={toggleImportant}

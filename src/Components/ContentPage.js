@@ -7,7 +7,6 @@ function ContentPage(props){
             {(props.activity == 'Main_Menu' ? <MainMenuButtons handleTBLMainMenuButton={props.handleTBLMainMenuButton}/> : 
             (props.activity == 'To_Buy_Lists' ? 
                 <ToBuyListsPage lists={props.toBuyLists} 
-                handleTBLAddItemButton={props.handleTBLAddItemButton}
                 handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
                 handleDeleteTblListItem={props.handleDeleteTblListItem}
                 toggleImportant={props.toggleImportant}/> : 

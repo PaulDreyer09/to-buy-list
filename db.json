@@ -1,18 +1,78 @@
 {
   "lists": [
-    {"id": "0", "name": "Groceries"},
-     {"id": "1", "name": "Cloths"},
-     {"id": "2", "name": "Tools"},
-     {"id": "3", "name": "Games"}
+    {
+      "id": "0",
+      "name": "Groceries"
+    },
+    {
+      "id": "1",
+      "name": "Cloths"
+    },
+    {
+      "id": "2",
+      "name": "Tools"
+    },
+    {
+      "id": "3",
+      "name": "Games"
+    }
   ],
   "listItems": [
-    {"id": "0", "listId": "0", "name":"Apples", "quantity": 2, "important": false}, 
-    {"id": "1", "listId": "0", "name":"Bananas", "quantity": 2, "important": false},
-    {"id": "2", "listId": "1", "name":"Steel Point Boots", "quantity": 2, "important": false},
-    {"id": "3", "listId": "1", "name":"Cargo Shorts", "quantity": 2, "important": false},
-    {"id": "4", "listId": "2", "name":"Makita Cordless SDS Drill", "quantity": 2, "important": false},
-    {"id": "5", "listId": "2", "name":"10mm SDS Drill bit", "quantity": 2, "important": false},
-    {"id": "6", "listId": "3", "name":"Age of Empires IV", "quantity": 2, "important": false},
-    {"id": "7", "listId": "3", "name":"Starcraft Remastered HD", "quantity": 2, "important": false}  
+    {
+      "id": "2",
+      "listId": "1",
+      "name": "Steel Point Boots",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "id": "3",
+      "listId": "1",
+      "name": "Cargo Shorts",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "id": "4",
+      "listId": "2",
+      "name": "Makita Cordless SDS Drill",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "id": "5",
+      "listId": "2",
+      "name": "10mm SDS Drill bit",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "id": "6",
+      "listId": "3",
+      "name": "Age of Empires IV",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "id": "7",
+      "listId": "3",
+      "name": "Starcraft Remastered HD",
+      "quantity": 2,
+      "important": false
+    },
+    {
+      "listId": 0,
+      "name": "Apples",
+      "quantity": "3",
+      "important": true,
+      "id": "eAumjXE"
+    },
+    {
+      "listId": 0,
+      "name": "Bananas",
+      "quantity": "3",
+      "important": true,
+      "id": "8IHoZ1C"
+    }
   ]
 }

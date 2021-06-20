@@ -7,7 +7,6 @@ const ToBuyListsPage = (props) => {
             <ToBuyList key={index} 
                 listIndex={index}
                 list={list} 
-                handleTBLAddItemButton={props.handleTBLAddItemButton}
                 handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
                 handleDeleteTblListItem={props.handleDeleteTblListItem}
                 toggleImportant={props.toggleImportant}></ToBuyList>)): 'Nothing to show'}

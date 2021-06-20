@@ -26,11 +26,7 @@ const AddItemForm = ({listIndex, handleTBLSubmitItemButton}) => {
         const onSubmit = (event) =>{
             event.preventDefault();
     
-            
-            const id = Math.floor(Math.random() * 100000) + 1;
-    
-            const item = { 
-                id: id,             
+            const item = {            
                 name: formName, 
                 quantity: formQuantity, 
                 important: formImportant
