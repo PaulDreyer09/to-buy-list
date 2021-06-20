@@ -120,10 +120,15 @@ h1{
   text-shadow: 2px 1px 10px #000;
 }
 
-.ToBuyList .listHeader i{
+.ToBuyList .listHeader .dropDownButton{
   font-size: 130%;
-  line-height: 1.8em;
-  text-shadow: 0 0 10px white;
+  text-shadow: #EEE 0 0 3px;
+  line-height: 1.8em;  
+}
+
+.ToBuyList .listHeader .listOption{
+  margin-right: 5px;
+  line-height: 1.8em;  
 }
 
 .ToBuyList .addItemButton{  

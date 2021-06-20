@@ -4,10 +4,23 @@ import AddItemForm from './AddItemForm';
 
 const ToBuyList = (props) => {
     const [displayForm, setDisplayForm] = useState(false);
+    const [displayListItems, setDisplayListItems] = useState(true);
 
     //toggle displayAddForm
-    const handleAddButton = () => {
+    const handleAddItemButton = () => {
         setDisplayForm(!displayForm);
+    }
+
+    const handleDropDownButton = () => {
+        setDisplayListItems(!displayListItems);
+    }
+
+    const handleEditListButton = () => {
+        
+    }
+
+    const handleDeleteListButton = () => {
+        props.handleDeleteTBL(props.list.id);
     }
 
     return(
@@ -15,10 +28,15 @@ const ToBuyList = (props) => {
             <div className='listHeader row'>
                 <h4 className='col-8'>{props.list.name}</h4>
                 
-                <a  onClick={() => handleAddButton} className='addItemButton col-3 button'>
+                <a  onClick={handleAddItemButton} className='col-3 btn btn-dark'>
                     {displayForm ? 'Close' : 'Add Item'}
                 </a>
-                <i className='fa fa-angle-down col-1 button'></i>
+                <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
+                <div className='listOptions'>
+                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> Add Item</i></a>|
+                    <a onClick={handleEditListButton}> <i className='fa fa-edit button listOption'> Edit list</i></a>|
+                    <a onClick={handleDeleteListButton}> <i className='fa fa-edit button listOption'> Delete list</i></a>
+                </div>
             </div>
             {
                     //Display a form to add a new item only after Add Item is clicked
@@ -30,6 +48,7 @@ const ToBuyList = (props) => {
             }
             
             {//Show message if no items are in the list
+                displayListItems ? (
                 props.list.items.length > 0 ? 
                 <div className='listContent'>
                     {props.list.items.map((listItem, index) => (<ListItem 
@@ -40,7 +59,7 @@ const ToBuyList = (props) => {
                     handleDeleteTblListItem={props.handleDeleteTblListItem}
                     toggleImportant={props.toggleImportant}/>))}
                 </div>
-                : 'No items to show'
+                : 'No items to show') : ''
             }  
             
             

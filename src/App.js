@@ -1,12 +1,6 @@
-import logo from './logo.svg';
-import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
-import MainMenuButtons from './Components/MainMenuButtons';
 import AppHeader from './Components/AppHeader';
 import ContentPage from './Components/ContentPage';
-
 import React, {useEffect, useState} from 'react';
-import ToBuyList from './Components/ToBuyList';
 
 function App() {
   const [activity, setActivity] = useState('Main_Menu');//activity keeps track of the page that needs to be shown
@@ -17,6 +11,7 @@ function App() {
   //List items for ToBuyListPage TEST use before adding database
   const [toBuyLists, setToBuyLists] = useState([]);
 
+  //Get data from server on start
   useEffect(() => {
     const getData = async () => {
       const listsFromServer = await fetchLists();
@@ -69,15 +64,8 @@ function App() {
     return data;
   }
 
+  //POST list item
   const addListItem = async (listId, listItem) => {
-    // let lists = [...toBuyLists];
-    // let targetList = lists[listId];    
-    
-    // targetList.items.push(listItem);
-    // lists[listId] = targetList;
-
-    // setToBuyLists(lists);
-
     const newItem = {listId: listId, ...listItem};
     const res = await fetch('http://localhost:5000/listItems', {
       method: 'POST',
@@ -100,6 +88,7 @@ function App() {
 
   }
   
+  //DELETE list item
   const deleteListItem = async (listIndex, listItemId) => {
     await fetch(`http://localhost:5000/listItems/${listItemId}`, {method: 'DELETE'});
 
@@ -112,6 +101,7 @@ function App() {
     setToBuyLists(lists);
   }
 
+  //POST toBuyList
   const AddList = async (listName) => {
     const newList = {name: listName}
     const res = await fetch('http://localhost:5000/lists', {
@@ -123,12 +113,13 @@ function App() {
     console.log('POST newList', data);
 
     //Update state    
-    setToBuyLists([...toBuyLists, {...data, items: []}]);
-    
-
+    setToBuyLists([...toBuyLists, {...data, items: []}]);   
   }
 
-  const handleAddNewTBL = async (listName)=>{
+  //DELETE toBuyList
+
+  //Add toBuyList
+  const handleAddNewTBL = async (listName) => {
     if(!listName){
       alert('Please enter list Name');
       return false;
@@ -136,6 +127,32 @@ function App() {
     else{
       AddList(listName);
       return true;
+    }
+  }
+
+  //Delete toBuyList
+  const handleDeleteTBL = async (listId) => {
+    const listIndex = toBuyLists.findIndex((list) => list.id == listId);
+
+    if(listIndex < 0){
+      alert('Something went wront trying to delete toBuyList');
+      return false;
+    }
+    else{
+      let targetList = toBuyLists[listIndex];
+
+      //All items must be deleted from the list to avoid having items with no parent list
+      if(targetList.items.length != 0){
+        alert('Please delete all items from the list first');
+        return false;
+      }
+      else{
+        //Detele the list        
+        await fetch(`http://localhost:5000/lists/${listId}`, {method:'DELETE'});
+
+        //Update state
+        setToBuyLists(toBuyLists.filter((list) => list.id != listId));
+      }      
     }
   }
 
@@ -178,9 +195,11 @@ function App() {
               <AppHeader title={title}/>
               <ContentPage activity={activity} toBuyLists={toBuyLists} 
                   handleAddNewTBL={handleAddNewTBL}
+                  handleDeleteTBL={handleDeleteTBL}
                   handleTBLMainMenuButton={handleTBLMainMenuButton}
                   handleDeleteTblListItem={handleDeleteTblListItem}
                   handleTBLSubmitItemButton={handleTBLSubmitItemButton}
+                  
                   toggleImportant={toggleImportant}
               /> 
           </div>

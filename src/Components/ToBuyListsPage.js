@@ -2,8 +2,6 @@ import ToBuyList from './ToBuyList';
 import AddListForm from './AddListForm';
 
 const ToBuyListsPage = (props) => {
-    console.log(props.handleAddNewTBL);
-    console.log(props.handleTBLSubmitItemButton)
     return(
     <div className='ToBuyListsPage'>
         <AddListForm handleAddNewTBL={props.handleAddNewTBL}/>
@@ -13,6 +11,7 @@ const ToBuyListsPage = (props) => {
                 list={list}                 
                 handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
                 handleDeleteTblListItem={props.handleDeleteTblListItem}
+                handleDeleteTBL={props.handleDeleteTBL}
                 toggleImportant={props.toggleImportant}></ToBuyList>)): 'Nothing to show'}
         {}
     </div>);

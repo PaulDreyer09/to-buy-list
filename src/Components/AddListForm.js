@@ -4,10 +4,12 @@ const AddListForm = ({handleAddNewTBL}) =>{
     const [displayForm, setDisplayForm] = useState(false);
     const [formName, setFormName] = useState('');
 
+    //Form name text change
     const onChange = (e) => {
         setFormName(e.target.value);
     }
 
+    //Form submit
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log('submit clicked');
@@ -20,7 +22,7 @@ const AddListForm = ({handleAddNewTBL}) =>{
 
     return (
         <div className='AddListForm'>
-        <button onClick={() => {setDisplayForm(!displayForm)}}>{displayForm? 'Cancel' : 'New Item'}</button>
+        <button className='btn btn-dark btn-block' onClick={() => {setDisplayForm(!displayForm)}}>{displayForm? 'Cancel' : 'New List'}</button>
         {displayForm ?
             <form onSubmit={onSubmit}>
                 <div className='form-control'>

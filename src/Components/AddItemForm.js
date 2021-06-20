@@ -30,9 +30,13 @@ const AddItemForm = ({listIndex, handleTBLSubmitItemButton}) => {
             name: formName, 
             quantity: formQuantity, 
             important: formImportant
-        };
+        };        
 
         handleTBLSubmitItemButton(listIndex, item);
+
+        setFormName('');
+        setFormQuantity('1');
+        setFormImportant(false);
     }
     
     return(    
