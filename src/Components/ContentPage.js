@@ -6,10 +6,12 @@ function ContentPage(props){
             
             {(props.activity == 'Main_Menu' ? <MainMenuButtons handleTBLMainMenuButton={props.handleTBLMainMenuButton}/> : 
             (props.activity == 'To_Buy_Lists' ? 
-                <ToBuyListsPage lists={props.toBuyLists} 
-                handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
-                handleDeleteTblListItem={props.handleDeleteTblListItem}
-                toggleImportant={props.toggleImportant}/> : 
+                <ToBuyListsPage 
+                    lists={props.toBuyLists} 
+                    handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
+                    handleDeleteTblListItem={props.handleDeleteTblListItem}
+                    handleAddNewTBL={props.handleAddNewTBL}
+                    toggleImportant={props.toggleImportant}/> : 
                 <div className='Placeholder for last activity'></div>))}
  
         </div>        

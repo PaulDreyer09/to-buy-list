@@ -22,18 +22,19 @@ const AddItemForm = ({listIndex, handleTBLSubmitItemButton}) => {
         setFormImportant(e.currentTarget.checked)
     }
 
-        //Create new item and add to current buy list
-        const onSubmit = (event) =>{
-            event.preventDefault();
+    //Create new item and add to current buy list
+    const onSubmit = (event) =>{
+        event.preventDefault();
+
+        const item = {            
+            name: formName, 
+            quantity: formQuantity, 
+            important: formImportant
+        };
+
+        handleTBLSubmitItemButton(listIndex, item);
+    }
     
-            const item = {            
-                name: formName, 
-                quantity: formQuantity, 
-                important: formImportant
-            };
-    
-            handleTBLSubmitItemButton(listIndex, item);
-        }
     return(    
         <div className='AddItemForm'>
             <form onSubmit={onSubmit}>

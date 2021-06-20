@@ -102,6 +102,8 @@ function App() {
   
   const deleteListItem = async (listIndex, listItemId) => {
     await fetch(`http://localhost:5000/listItems/${listItemId}`, {method: 'DELETE'});
+
+    //Update state
     let lists = [...toBuyLists];
     let targetList = lists[listIndex].items;
 
@@ -110,13 +112,44 @@ function App() {
     setToBuyLists(lists);
   }
 
+  const AddList = async (listName) => {
+    const newList = {name: listName}
+    const res = await fetch('http://localhost:5000/lists', {
+      method:'POST',
+      headers:{'Content-type': 'application/json'},
+      body: JSON.stringify(newList)
+    });
+    const data = await res.json();
+    console.log('POST newList', data);
+
+    //Update state    
+    setToBuyLists([...toBuyLists, {...data, items: []}]);
+    
+
+  }
+
+  const handleAddNewTBL = async (listName)=>{
+    if(!listName){
+      alert('Please enter list Name');
+      return false;
+    }
+    else{
+      AddList(listName);
+      return true;
+    }
+  }
+
   const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
 
   //Submit new ListItem to a ToBuyList
   const handleTBLSubmitItemButton = (listId, {id, name, quantity, important}) => {
-      if(!name)
-          {alert('Please enter a name')}
-      addListItem(listId, {id: id, name: name, quantity: quantity, important: important})
+      if(!name){
+        alert('Please enter a name')
+      }
+      else{
+        addListItem(listId, {id: id, name: name, quantity: quantity, important: important})
+      }
+
       
   }
 
@@ -144,6 +177,7 @@ function App() {
        <div>
               <AppHeader title={title}/>
               <ContentPage activity={activity} toBuyLists={toBuyLists} 
+                  handleAddNewTBL={handleAddNewTBL}
                   handleTBLMainMenuButton={handleTBLMainMenuButton}
                   handleDeleteTblListItem={handleDeleteTblListItem}
                   handleTBLSubmitItemButton={handleTBLSubmitItemButton}
