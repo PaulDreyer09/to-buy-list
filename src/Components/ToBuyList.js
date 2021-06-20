@@ -16,7 +16,7 @@ const ToBuyList = (props) => {
                 <h4 className='col-8'>{props.list.name}</h4>
                 
                 <a href='#' onClick={handleAddButton} className='addItemButton col-3 button'>
-                    Add Item
+                    {displayForm? 'Close' : 'Add'}
                 </a>
                 <i className='fa fa-angle-down col-1 button'></i>
             </div>
