@@ -22,8 +22,14 @@ function App() {
 
   const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
 
-  const addMethod = () => {
-      console.log('Hey man did you just try to add something?');
+  const addListItem = (listId, listItem) => {
+    let lists = [...toBuyLists];
+    let targetList = lists[listId];    
+    
+    targetList.items.push(listItem);
+    lists[listId] = targetList;
+
+    setToBuyLists(lists);
   }
 
   const handleTBLAddItemButton = (id) => {        
@@ -32,22 +38,11 @@ function App() {
   };
 
   //Submit new ListItem to a ToBuyList
-  const handleTBLSubmitItemButton = (listId, name) => {
+  const handleTBLSubmitItemButton = (listId, {id, name, quantity, important}) => {
     console.log('listID', listId);
-      if(name === '')
+      if(!name)
           {alert('Please enter a name')}
-      else{
-        
-        let lists = [...toBuyLists];
-        let targetList = lists[listId];
-        
-        console.log(targetList);
-        
-        targetList.items.push({id: 0, name: name});
-        lists[listId] = targetList;
-
-        setToBuyLists(lists);
-      }
+      addListItem(listId, {id: id, name: name, quantity: quantity, important: important})
       
   }
 

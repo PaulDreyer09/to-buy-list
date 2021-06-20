@@ -1,0 +1,8 @@
+Technologies used in this project
+
+Javascript
+Sass/CSS
+Html
+React js
+Fontawesome react
+Bootstrap

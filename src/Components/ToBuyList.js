@@ -1,35 +1,15 @@
 import React, { useState } from 'react';
 import ListItem from './ListItem';
+import AddItemForm from './AddItemForm';
 
 const ToBuyList = (props) => {
-    const [addFormName, setAddFormName] = useState('');
-    const [displayAddForm, setDisplayAddForm] = useState(false);
-
-    const handleChangeName = (e) => {
-        setAddFormName(e.target.value);
-    }
+    const [displayForm, setDisplayForm] = useState(false);
 
     //toggle displayAddForm
     const handleAddButton = () => {
-        setDisplayAddForm(!displayAddForm);
+        setDisplayForm(!displayForm);
     }
 
-    const handleSubmit = (event) =>{
-        console.log('subim', props.listIndex, addFormName);
-        console.log();
-        props.handleTBLSubmitItemButton(props.listIndex, addFormName);
-        event.preventDefault();
-    }
-
-    let addToList = (id) => {
-        Event.preventDefault();
-        
-        
-        /*
-            We stopped here
-            Need to make this function accept parameters for the item and try to make it a normal function call from here
-        */
-    }
     return(
         <div className='ToBuyList shadow-box container'>
             <div className='listHeader row'>
@@ -43,14 +23,10 @@ const ToBuyList = (props) => {
             {
                     //Display a form to add a new item only after Add Item is clicked
                     //Also close all other forms
-                    displayAddForm?
-                    <div className='listItemForm'>
-                        <form onSubmit={Event.preventDefault, addToList}>
-                            <label htmlFor='formName'>Item Name</label>
-                            <input type='text' onChange={handleChangeName} value={addFormName} placeholder='Enter item name'/>
-                            <input type='submit' onClick={handleSubmit} value='Submit'/>
-                        </form>
-                    </div>:''                    
+                    displayForm?
+                    <AddItemForm 
+                    listIndex={props.listIndex}
+                    handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}/>:''                    
             }
             {props.list.items.length > 0 ? 
                 <div className='listContent'>
