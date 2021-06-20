@@ -5,7 +5,7 @@ import MainMenuButtons from './Components/MainMenuButtons';
 import AppHeader from './Components/AppHeader';
 import ContentPage from './Components/ContentPage';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ToBuyList from './Components/ToBuyList';
 
 function App() {
@@ -14,13 +14,59 @@ function App() {
 
   const [title, setTitle] = useState('To Buy Lists');
 
-  const [toBuyLists, setToBuyLists] = useState([   //List items for ToBuyListPage TEST use before adding database
-    {id: 'l0', name: 'Groceries', displayForm: false, items: [{id: 1, name:'Apples', quantity: 2, important: false}, {id: 2, name:'Bananas', quantity: 2, important: false}]},
-     {id: 'l2', name: 'Cloths', displayForm: false, items: [{id: 3, name:'Steel Point Boots', quantity: 1}, {id: 4, name:'Cargo Shorts', quantity: 2}]},
-     {id: 'l3', name: 'Tools', displayForm: false, items: [{id: 5, name:'Makita Cordless SDS Drill', quantity: 1}, {id: 6, name:'10mm SDS Drill bit', quantity: 2}]},
-     {id: 'l4', name: 'Games', displayForm: false, items: [{id: 7, name:'Age of Empires IV', quantity: 2}, {id: 8, name:'Starcraft Remastered HD', quantity: 2}]}]);
+  //List items for ToBuyListPage TEST use before adding database
+  const [toBuyLists, setToBuyLists] = useState([]);
 
-  const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
+  useEffect(() => {
+    const getData = async () => {
+      const listsFromServer = await fetchLists();
+      const listItemsFromServer = await fetchListItems();
+
+      //Object holding all the lists and their listItems
+      let toBuyLists = [];
+      
+      //Create list objects
+      listsFromServer.map((list, listIndex) => {   
+        let listItems = [];
+
+        //traverse through the list and create listitems from each items data
+        listItemsFromServer.map((item) => {
+          if(item == null){
+            console.log("Eh something went wrong getting the lists");
+          }
+          if(item.listId === list.id){
+            listItems.push({
+              name: item.name, 
+              quantity: item.quantity, 
+              important: item.important}
+              );
+          }
+        })
+
+        toBuyLists.push({id: list.id, name: list.name, items: listItems, displayForm: false});
+      })
+            
+      setToBuyLists(toBuyLists) ;
+    }
+    getData();
+    
+  }, []);
+
+  //Fetch Lists
+  const fetchLists = async () => {
+    //fetch resources from json server
+    const res = await fetch('http://localhost:5000/lists');
+    const data = await res.json();
+    return data;
+  }
+
+  //Fetch List items
+  const fetchListItems = async () => {
+    //fetch resources from json server
+    const res = await fetch('http://localhost:5000/listItems');
+    const data = await res.json();
+    return data;
+  }
 
   const addListItem = (listId, listItem) => {
     let lists = [...toBuyLists];
@@ -31,6 +77,8 @@ function App() {
 
     setToBuyLists(lists);
   }
+
+  const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
 
   const handleTBLAddItemButton = (id) => {        
           //Change displayForm to false for the list containing the clicked button
