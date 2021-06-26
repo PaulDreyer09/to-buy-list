@@ -26,14 +26,10 @@ const ToBuyList = (props) => {
     return(
         <div className='ToBuyList shadow-box container'>
             <div className='listHeader row'>
-                <h4 className='col-8'>{props.list.name}</h4>
-                
-                <a  onClick={handleAddItemButton} className='col-3 btn btn-dark'>
-                    {displayForm ? 'Close' : 'Add Item'}
-                </a>
+                <h4 className='col-11'>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
-                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> Add Item</i></a>|
+                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayForm ? 'Close' : 'Add Item'}</i></a>|
                     <a onClick={handleEditListButton}> <i className='fa fa-edit button listOption'> Edit list</i></a>|
                     <a onClick={handleDeleteListButton}> <i className='fa fa-edit button listOption'> Delete list</i></a>
                 </div>

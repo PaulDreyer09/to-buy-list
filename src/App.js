@@ -198,8 +198,7 @@ function App() {
                   handleDeleteTBL={handleDeleteTBL}
                   handleTBLMainMenuButton={handleTBLMainMenuButton}
                   handleDeleteTblListItem={handleDeleteTblListItem}
-                  handleTBLSubmitItemButton={handleTBLSubmitItemButton}
-                  
+                  handleTBLSubmitItemButton={handleTBLSubmitItemButton}                  
                   toggleImportant={toggleImportant}
               /> 
           </div>
