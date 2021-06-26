@@ -40,24 +40,28 @@ const AddItemForm = ({listIndex, handleTBLSubmitItemButton}) => {
     }
     
     return(    
-        <div className='AddItemForm'>
+        <div className='AddItemForm well'>
             <form onSubmit={onSubmit}>
-                <div className='form-control'>
-                    <label >Item Name</label>
-                    <input type='text' onChange={handleChangeName} value={formName} placeholder='Enter item name'/>
+                <div className='row'>
+                    <label className='col-2'>Item Name</label>
+                    <input className='col-10' type='text' onChange={handleChangeName} value={formName} placeholder='Enter item name'/>
                 </div>
-                <div className='form-control'>
-                    <label>Quantity</label>
-                    <input type='number' onChange={handleChangeQuantity} value={formQuantity}/>
+                <div className='row'>
+                    <label className='col-2'>Quantity</label>
+                    <input className='col-10' type='number' onChange={handleChangeQuantity} value={formQuantity}/>
                 </div>
-                <div className='form-control'>
+                <div className='row'>
+                    <div className='col-2'>
                     <label>Important</label>
                     <input 
+                        className='submitItemButton' 
                         type='checkbox' 
                         checked={formImportant}
                         value={formImportant}
                         onChange={handleChangeImportant}
                     />
+                    </div>
+                    
                 </div>
                 
                 <input type='submit' value='Submit'/>

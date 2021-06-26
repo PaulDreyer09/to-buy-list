@@ -112,7 +112,7 @@ h1{
   padding: 5px 2em;
   margin-bottom: 1em;
   border-radius: 10px;
-  background-image: linear-gradient(90deg, #616682, #3B3B52);
+  background-image: linear-gradient(90deg, #8085a1, #3B3B52);
 }
 
 .ToBuyListsPage .AddListForm label{
@@ -156,6 +156,12 @@ h1{
   font-weight: bold;
   background-color: #444;
   box-shadow: 1px 1px 3px #aaa;
+}
+
+
+
+.ToBuyList .AddItemForm .row{
+  text-align: left;
 }
 
 .ToBuyList .listContent{
