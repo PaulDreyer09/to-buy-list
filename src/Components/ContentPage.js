@@ -4,7 +4,7 @@ function ContentPage(props){
     return(
         <div id='ContentPage'>           
             
-            {(props.activity == 'Main_Menu' ? <MainMenuButtons handleTBLMainMenuButton={props.handleTBLMainMenuButton}/> : 
+            {(props.activity == 'Main_Menu' ? <MainMenuButtons handleMainMenuButton={props.handleMainMenuButton}/> : 
             (props.activity == 'To_Buy_Lists' ? 
                 <ToBuyListsPage 
                     lists={props.toBuyLists} 

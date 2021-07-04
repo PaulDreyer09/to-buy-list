@@ -38,6 +38,8 @@ const AddItemForm = ({listIndex, handleTBLSubmitItemButton}) => {
         setFormQuantity('1');
         setFormImportant(false);
     }
+
+    //Close
     
     return(    
         <div className='AddItemForm well'>

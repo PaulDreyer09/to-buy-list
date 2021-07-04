@@ -67,7 +67,8 @@ function App() {
   //POST list item
   const addListItem = async (listId, listItem) => {
     const newItem = {listId: listId, ...listItem};
-    const res = await fetch('http://localhost:5000/listItems', {
+    const res = await fetch('http://localhost:5000/listItems', 
+    {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify(newItem)
@@ -156,7 +157,13 @@ function App() {
     }
   }
 
-  const handleTBLMainMenuButton = () => { setActivity('To_Buy_Lists') };  
+  //Change Activities at main meny
+  const handleMainMenuButton = (activityName) => {
+    setActivity(activityName);
+  }
+
+  //Change activity back to Main_Menu
+  const handleBackButton = () => {setActivity('Main_Menu')};
 
   //Submit new ListItem to a ToBuyList
   const handleTBLSubmitItemButton = (listId, {id, name, quantity, important}) => {
@@ -192,15 +199,16 @@ function App() {
   return (  
     <div className="App">
        <div>
-              <AppHeader title={title}/>
+              <AppHeader 
+                  title={title} 
+                  handleBackButton={handleBackButton}/>
               <ContentPage activity={activity} toBuyLists={toBuyLists} 
                   handleAddNewTBL={handleAddNewTBL}
                   handleDeleteTBL={handleDeleteTBL}
-                  handleTBLMainMenuButton={handleTBLMainMenuButton}
+                  handleMainMenuButton={handleMainMenuButton}                  
                   handleDeleteTblListItem={handleDeleteTblListItem}
                   handleTBLSubmitItemButton={handleTBLSubmitItemButton}                  
-                  toggleImportant={toggleImportant}
-              /> 
+                  toggleImportant={toggleImportant}/> 
           </div>
     </div>
   );

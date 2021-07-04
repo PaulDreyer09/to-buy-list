@@ -24,29 +24,7 @@ class UI extends Component{
     }
     
     handleTBLMainMenuButton = () => { this.setState({activity: 'To_Buy_Lists'}) };  
-    addMethod(){
-        console.log('Hey man did you just try to add something?');
-    }
-    handleTBLAddItemButton = (id) => {        
-            //Change displayForm to false for the list containing the clicked button
-            console.log(`add ${id}`);
 
-            // let index = this.state.toBuyLists.findIndex(x => x.id === id);
-            // if(index !== -1){
-            //     let temp = this.state.toBuyLists[index];
-            //     let tempList = this.state.toBuyLists;
-            //     temp.displayForm = true;
-            //     tempList[index] = temp;
-            //     this.setState({toBuyLists: tempList});
-            // }else{
-            //     console.log('Dude what did you click?');
-            // }        
-    };
-
-    //Submit new ListItem to a ToBuyList
-    handleTblSubmitItemButton = () => {
-        this.addMethod();
-    }
 
     //Delete ListItem from ToBuyList
     handleDeleteTblListItem = (listId, itemId) => {
