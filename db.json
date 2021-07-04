@@ -2,19 +2,28 @@
   "lists": [
     {
       "id": "0",
-      "name": "Groceries"
+      "name": "Groceries",
+      "listType": "0"
     },
     {
       "id": "1",
-      "name": "Cloths"
+      "name": "Cloths",
+      "listType": "0"
     },
     {
       "id": "2",
-      "name": "Tools"
+      "name": "Tools",
+      "listType": "0"
     },
     {
       "id": "3",
-      "name": "Games"
+      "name": "Games",
+      "listType": "0"
+    },
+    {
+      "id": "4",
+      "name": "Shopping List 1",
+      "listType": "1"
     }
   ],
   "listItems": [

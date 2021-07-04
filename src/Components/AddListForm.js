@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const AddListForm = ({handleAddNewTBL}) =>{
+const AddListForm = ({handleAddNewList}) =>{
     const [displayForm, setDisplayForm] = useState(false);
     const [formName, setFormName] = useState('');
 
@@ -13,7 +13,7 @@ const AddListForm = ({handleAddNewTBL}) =>{
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log('submit clicked');
-        const success = await handleAddNewTBL(formName);
+        const success = await handleAddNewList(formName);
         if(success){
             setFormName('');
             setDisplayForm(false);

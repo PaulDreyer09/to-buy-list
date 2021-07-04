@@ -15,16 +15,16 @@ function App() {
   const [title, setTitle] = useState('Main Menu');
 
   //List items for ToBuyListPage TEST use before adding database
-  const [toBuyLists, setToBuyLists] = useState([]);
+  const [itemLists, setItemLists] = useState([]);
 
   //Get data from server on start
   useEffect(() => {
     const getData = async () => {
-      const listsFromServer = await fetchLists();
+      const listsFromServer = await fetchitemLists();
       const listItemsFromServer = await fetchListItems();
 
       //Object holding all the lists and their listItems
-      let toBuyLists = [];
+      let itemLists = [];
       
       //Create list objects
       listsFromServer.map((list, listIndex) => {   
@@ -45,17 +45,16 @@ function App() {
           }
         })
 
-        toBuyLists.push({id: list.id, name: list.name, items: listItems, displayForm: false});
-      })
-            
-      setToBuyLists(toBuyLists) ;
+        itemLists.push({id: list.id, name: list.name, items: listItems, displayForm: false, listType: list.listType});
+      })          
+      setItemLists(itemLists) ;
     }
     getData();
     
   }, []);
 
-  //Fetch Lists
-  const fetchLists = async () => {
+  //Fetch itemLists
+  const fetchitemLists = async () => {
     //fetch resources from json server
     const res = await fetch('http://localhost:5000/lists');
     const data = await res.json();
@@ -84,14 +83,14 @@ function App() {
     console.log(data);
     
     //Add task to list
-    let lists = [...toBuyLists];
+    let lists = [...itemLists];
     lists[listId].items.push({
       id: data.id,
       name: data.name,
       quantity: data.quantity,
       important: data.important });
     
-      setToBuyLists(lists);
+      setItemLists(lists);
 
   }
   
@@ -100,17 +99,18 @@ function App() {
     await fetch(`http://localhost:5000/listItems/${listItemId}`, {method: 'DELETE'});
 
     //Update state
-    let lists = [...toBuyLists];
+    let lists = [...itemLists];
     let targetList = lists[listIndex].items;
 
     lists[listIndex].items = targetList.filter((listItem) => (listItem.id != listItemId));
 
-    setToBuyLists(lists);
+    setItemLists(lists);
   }
 
   //POST toBuyList
-  const AddList = async (listName) => {
-    const newList = {name: listName}
+  //listType: 0 = ToBuyList, 1 = ShoppingList
+  const AddList = async (listName, listType) => {
+    const newList = {name: listName, listType: listType}
     const res = await fetch('http://localhost:5000/lists', {
       method:'POST',
       headers:{'Content-type': 'application/json'},
@@ -120,7 +120,7 @@ function App() {
     console.log('POST newList', data);
 
     //Update state    
-    setToBuyLists([...toBuyLists, {...data, items: []}]);   
+    setItemLists([...itemLists, {...data, items: []}]);   
   }
 
   //DELETE toBuyList
@@ -132,21 +132,33 @@ function App() {
       return false;
     }
     else{
-      AddList(listName);
+      AddList(listName, 0);
       return true;
     }
   }
 
+    //Add ShoppingList
+    const handleAddNewSL = async (listName) => {
+      if(!listName){
+        alert('Please enter list Name');
+        return false;
+      }
+      else{
+        AddList(listName, 1);
+        return true;
+      }
+    }
+
   //Delete toBuyList
   const handleDeleteTBL = async (listId) => {
-    const listIndex = toBuyLists.findIndex((list) => list.id == listId);
+    const listIndex = itemLists.findIndex((list) => list.id == listId);
 
     if(listIndex < 0){
       alert('Something went wront trying to delete toBuyList');
       return false;
     }
     else{
-      let targetList = toBuyLists[listIndex];
+      let targetList = itemLists[listIndex];
 
       //All items must be deleted from the list to avoid having items with no parent list
       if(targetList.items.length != 0){
@@ -158,14 +170,13 @@ function App() {
         await fetch(`http://localhost:5000/lists/${listId}`, {method:'DELETE'});
 
         //Update state
-        setToBuyLists(toBuyLists.filter((list) => list.id != listId));
+        setItemLists(itemLists.filter((list) => list.id != listId));
       }      
     }
   }
 
   //Handle changing activities from passing an activity object from activies
   const changeActivity = (activityObj) => {
-    console.log(activityObj);
     setActivity(activityObj.name);
     setTitle(activityObj.title);
   }
@@ -197,13 +208,13 @@ function App() {
 
   //Delete ListItem from ToBuyList
   const handleDeleteTblListItem = (listIndex, listItemIndex) => {
-      const listItemId = toBuyLists[listIndex].items[listItemIndex].id;
+      const listItemId = itemLists[listIndex].items[listItemIndex].id;
       deleteListItem(listIndex, listItemId);
   };
 
   //Toggle item being important to show a star next to the item name
   const toggleImportant = (listIndex, itemIndex) => {
-    let lists = [...toBuyLists];  
+    let lists = [...itemLists];  
     let targetList = lists[listIndex];
     let listItem = targetList.items[itemIndex];
 
@@ -211,8 +222,10 @@ function App() {
     targetList[listIndex] = listItem;
 
     lists[listIndex] = targetList;
-    setToBuyLists(lists);
+    setItemLists(lists);
   }
+
+  console.log(itemLists);
 
   return (  
     <div className="App">
@@ -221,8 +234,11 @@ function App() {
                   title={title} 
                   handleBackButton={handleBackButton}
                   displayBackButton={displayBackButton}/>
-              <ContentPage activity={activity} toBuyLists={toBuyLists} 
+              <ContentPage 
+                  activity={activity} 
+                  itemLists={itemLists} 
                   handleAddNewTBL={handleAddNewTBL}
+                  handleAddNewSL={handleAddNewSL}
                   handleDeleteTBL={handleDeleteTBL}
                   handleMainMenuButton={handleMainMenuButton}                  
                   handleDeleteTblListItem={handleDeleteTblListItem}
