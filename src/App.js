@@ -3,10 +3,16 @@ import ContentPage from './Components/ContentPage';
 import React, {useEffect, useState} from 'react';
 
 function App() {
+  const activities = [
+  {title: 'Main Menu' ,name: 'Main_Menu'},
+  {title: 'To Buy Lists' ,name: 'To_Buy_Lists'},
+  {title: 'Shopping Lists' ,name: 'Shopping_Lists'},
+  {title: 'Went Shopping' ,name: 'Went_Shopping'},]
+
   const [activity, setActivity] = useState('Main_Menu');//activity keeps track of the page that needs to be shown
   //activity names: Main_Menu, To_Buy_Lists
 
-  const [title, setTitle] = useState('To Buy Lists');
+  const [title, setTitle] = useState('Main Menu');
 
   //List items for ToBuyListPage TEST use before adding database
   const [toBuyLists, setToBuyLists] = useState([]);
@@ -157,13 +163,27 @@ function App() {
     }
   }
 
-  //Change Activities at main meny
-  const handleMainMenuButton = (activityName) => {
-    setActivity(activityName);
+  //Handle changing activities from passing an activity object from activies
+  const changeActivity = (activityObj) => {
+    console.log(activityObj);
+    setActivity(activityObj.name);
+    setTitle(activityObj.title);
   }
 
+  //State to display back button or not
+  const [displayBackButton, setDisplayBackButton] = useState(false);
+
+  //Change Activities at main menu
+  const handleMainMenuButton = (index) => {
+    changeActivity(activities[index])
+    setDisplayBackButton(true);
+  }  
+
   //Change activity back to Main_Menu
-  const handleBackButton = () => {setActivity('Main_Menu')};
+  const handleBackButton = () => {
+    changeActivity(activities[0]);    
+    setDisplayBackButton(false);
+  };
 
   //Submit new ListItem to a ToBuyList
   const handleTBLSubmitItemButton = (listId, {id, name, quantity, important}) => {
@@ -172,9 +192,7 @@ function App() {
       }
       else{
         addListItem(listId, {id: id, name: name, quantity: quantity, important: important})
-      }
-
-      
+      }      
   }
 
   //Delete ListItem from ToBuyList
@@ -201,7 +219,8 @@ function App() {
        <div>
               <AppHeader 
                   title={title} 
-                  handleBackButton={handleBackButton}/>
+                  handleBackButton={handleBackButton}
+                  displayBackButton={displayBackButton}/>
               <ContentPage activity={activity} toBuyLists={toBuyLists} 
                   handleAddNewTBL={handleAddNewTBL}
                   handleDeleteTBL={handleDeleteTBL}
