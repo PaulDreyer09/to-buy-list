@@ -2,26 +2,28 @@ import MainMenuButtons from './MainMenuButtons';
 import ToBuyListsPage from './ToBuyListsPage';
 import ShoppingListsPage from './ShoppingListsPage';
 function ContentPage(props){    
+    console.log('ContentPage',props.TBLList);
     return(
         <div id='ContentPage'>           
             
             {(props.activity == 'Main_Menu' ? <MainMenuButtons handleMainMenuButton={props.handleMainMenuButton}/> : 
                 (props.activity == 'To_Buy_Lists' ? 
                     <ToBuyListsPage 
-                    lists={props.itemLists} 
+                    TBLList={props.TBLList} 
                     handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
-                    handleDeleteTblListItem={props.handleDeleteTblListItem}
+                    handleDeleteTBLListItem={props.handleDeleteTBLListItem}
                     handleDeleteTBL={props.handleDeleteTBL}
                     handleAddNewTBL={props.handleAddNewTBL}
                     toggleImportant={props.toggleImportant}/> 
                         : 
                     (props.activity == 'Shopping_Lists' ? 
                         <ShoppingListsPage 
-                        lists={props.itemLists} 
+                        SLList={props.SLList} 
+                        TBLList={props.TBLList} 
                         handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
-                        handleDeleteTblListItem={props.handleDeleteTblListItem}
+                        handleDeleteTBLListItem={props.handleDeleteTBLListItem}
                         handleDeleteTBL={props.handleDeleteTBL}
-                        handleAddNewTBL={props.handleAddNewTBL}
+                        handleAddNewSL={props.handleAddNewSL}
                         toggleImportant={props.toggleImportant}/> 
                         : 
                     '')

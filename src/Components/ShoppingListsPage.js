@@ -1,20 +1,22 @@
-import ToBuyList from './ToBuyList';
+import ShoppingList from './ShoppingList';
 import AddListForm from './AddListForm';
 
 const ShoppingListsPage = (props) => {
+    //console.log('ShoppingListsPage', props.TBLList);
     return(
     <div className='ShoppingListsPage'>
-        <AddListForm handleAddNewSL={props.handleAddNewSL}/>
-        {props.lists.length > 0 ? 
-            props.lists.filter((list) => {return list.listType == '1'}).map((list, index) => {
-                console.log(list)
-                return <ToBuyList key={index} 
+        <AddListForm handleAddNewList={props.handleAddNewSL}/>
+        {props.SLList.length > 0 ? 
+            props.SLList.map((list, index) => {
+                return <ShoppingList key={index} 
                     listIndex={index}
-                    list={list}                 
+                    list={list}            
+                    TBLList={props.TBLList}     
+                    handleSelectList={props.handleSelectList}
                     handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
                     handleDeleteTblListItem={props.handleDeleteTblListItem}
                     handleDeleteTBL={props.handleDeleteTBL}
-                    toggleImportant={props.toggleImportant}></ToBuyList>}): 'Nothing to show'}
+                    toggleImportant={props.toggleImportant}></ShoppingList>}): 'Nothing to show'}
 
     </div>);
     }

@@ -21,9 +21,9 @@
       "listType": "0"
     },
     {
-      "id": "4",
-      "name": "Shopping List 1",
-      "listType": "1"
+      "name": "SL 1",
+      "listType": 1,
+      "id": "iYD7Jnc"
     }
   ],
   "listItems": [

@@ -1,162 +1,132 @@
 body {
   margin: 0;
-  font-family:"Century Gothic", Georgia, serif;
+  font-family: "Century Gothic", Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .App {
   margin: 0 auto;
   text-align: center;
-  color:linen;
+  color: linen;
   max-width: 920px;
   background-color: #383B4F;
 }
 
-.button{
+.button {
   cursor: pointer;
 }
 
-
-
-h1{
-  color: rgb(254, 255, 241);
+h1 {
+  color: #fefff1;
 }
 
-.AppHeader{
+.AppHeader {
   display: block;
   width: 100%;
   margin: 0;
   padding: 1em;
-  background-image: linear-gradient(130deg, #739EFF,  #5b4dd8);
+  background-image: linear-gradient(130deg, #739EFF, #5b4dd8);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   text-align: center;
-  box-shadow: 0px 5px 10px #222; 
+  box-shadow: 0px 5px 10px #222;
 }
-
-.AppHeader .headerBackButton{
+.AppHeader .headerBackButton {
   display: flex;
   font-size: 1.5em;
   align-items: center;
-  position:;
   top: 50%;
-  
+  float: left;
 }
-
-.AppHeader h1{
+.AppHeader h1 {
   text-shadow: 1px 2px 2px #000;
 }
-
-.AppHeader .DropDownMenuButton{
+.AppHeader .DropDownMenuButton {
   max-width: 33px;
   padding: 4px 2px;
 }
-
 .AppHeader .DropDownMenuButton .menuButtonBar {
   width: 100%;
   height: 5px;
   margin-top: 0;
   margin-bottom: 5px;
   padding: 0;
-  background-color: rgb(92, 102, 255);
+  background-color: #5c66ff;
 }
-.AppHeader .DropDownMenuButton .menuButtonBar:nth-child(3){
+.AppHeader .DropDownMenuButton .menuButtonBar:nth-child(3) {
   margin-bottom: 0;
 }
 
-.shadow-box{
+.shadow-box {
   box-shadow: 0px 2px 10px #111111;
-  
 }
 
-.MainMenuButtons{  
+.MainMenuButtons {
   margin-top: 1.5em;
   padding-bottom: 1em;
 }
-
-.MainMenuButtons .mainMenuButton{
+.MainMenuButtons .mainMenuButton {
   height: 5em;
   margin-bottom: 1em;
   border-radius: 8px;
   background-image: linear-gradient(90deg, #616682, #3B3B52);
   box-shadow: 0px 2px 10px #111111;
 }
-
-.MainMenuButtons a{
+.MainMenuButtons a {
   display: block;
   line-height: 5em;
   margin-bottom: 5px;
   border-top-width: 0px;
-  border-right-width: 0px;  
+  border-right-width: 0px;
   text-decoration: none;
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px 5px black;
   cursor: pointer;
 }
-
-.MainMenuButtons a:hover{
+.MainMenuButtons a:hover {
   text-decoration: none;
-  
 }
 
-.ToBuyListsPage{
-  padding: 1em
+.ToBuyListsPage, .ShoppingListsPage {
+  padding: 1em;
 }
-
-.ToBuyListsPage .AddListForm{
+.ToBuyListsPage .AddListForm, .ShoppingListsPage .AddListForm {
   margin-bottom: 1em;
 }
-
-.ToBuyListsPage .AddListForm form{
+.ToBuyListsPage .AddListForm form, .ShoppingListsPage .AddListForm form {
   box-sizing: border-box;
   padding: 5px 2em;
   margin-bottom: 1em;
   border-radius: 10px;
   background-image: linear-gradient(90deg, #8085a1, #3B3B52);
 }
-
-.ToBuyListsPage .AddListForm label{
+.ToBuyListsPage .AddListForm label, .ShoppingListsPage .AddListForm label {
   display: flex;
-  align-items: center;  
+  align-items: center;
   margin: 0;
 }
 
-.ToBuyList{
+.ToBuyList, .ShoppingList {
   box-sizing: border-box;
   min-width: 100%;
-  
   padding: 5px 2em;
-  margin-bottom: 1em;  
+  margin-bottom: 1em;
   border-radius: 10px;
   background-image: linear-gradient(90deg, #616682, #3B3B52);
 }
-
-.ToBuyList h4{
+.ToBuyList h4, .ShoppingList h4 {
   display: inline-block;
   text-align: left;
   padding: 0;
   text-shadow: 2px 1px 10px #000;
 }
-
-.ToBuyList .listHeader .dropDownButton{
-  font-size: 130%;
-  text-shadow: #EEE 0 0 3px;
-  line-height: 1.8em;  
-}
-
-.ToBuyList .listHeader .listOption{
-  margin-right: 5px;
-  line-height: 1.8em;  
-}
-
-.ToBuyList .addItemButton{  
+.ToBuyList .addItemButton, .ShoppingList .addItemButton {
   height: 2em;
   line-height: 2em;
   margin: 0 0em;
@@ -166,45 +136,42 @@ h1{
   background-color: #444;
   box-shadow: 1px 1px 3px #aaa;
 }
+.ToBuyList .listHeader .dropDownButton, .ShoppingList .listHeader .dropDownButton {
+  font-size: 130%;
+  text-shadow: #EEE 0 0 3px;
+  line-height: 1.8em;
+}
+.ToBuyList .listHeader .listOption, .ShoppingList .listHeader .listOption {
+  margin-right: 5px;
+  line-height: 1.8em;
+}
 
-
-
-.ToBuyList .AddItemForm .row{
+.ToBuyList .AddItemForm .row {
   text-align: left;
 }
 
-.ToBuyList .listContent{
+.ToBuyList .listContent {
   width: 100%;
 }
 
-.ListItem{
+.ListItem {
   display: block;
   text-align: left;
-  padding: 5px 0;  
+  padding: 5px 0;
   margin: 0 1em 0 1em;
-  
-  
 }
-
-.ListItem .line{
+.ListItem .line {
   min-height: 1px;
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid #739EFF;  
+  border-bottom: 1px solid #739EFF;
 }
-
-.ListItem .itemOptions{
+.ListItem .itemOptions {
   float: right;
 }
-
-.ListItem .itemOptions .addButton{
+.ListItem .itemOptions .addButton {
   margin-left: 10px;
 }
-
-.ListItem a{
+.ListItem a {
   color: white;
-}
-
-@media only screen and (min-width: 576px){
-  
 }
