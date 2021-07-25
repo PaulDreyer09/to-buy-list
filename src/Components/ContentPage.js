@@ -1,6 +1,7 @@
 import MainMenuButtons from './MainMenuButtons';
 import ToBuyListsPage from './ToBuyListsPage';
 import ShoppingListsPage from './ShoppingListsPage';
+import WishListsPage from './WishListsPage';
 function ContentPage(props){    
     console.log('ContentPage',props.TBLList);
     return(
@@ -26,7 +27,7 @@ function ContentPage(props){
                         handleAddNewSL={props.handleAddNewSL}
                         toggleImportant={props.toggleImportant}/> 
                         : 
-                    '')
+                        <WishListsPage/>)
                 )
             )}
         </div>        

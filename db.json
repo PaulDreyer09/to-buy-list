@@ -32,42 +32,42 @@
       "listId": "1",
       "name": "Steel Point Boots",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "id": "3",
       "listId": "1",
       "name": "Cargo Shorts",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "id": "4",
       "listId": "2",
       "name": "Makita Cordless SDS Drill",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "id": "5",
       "listId": "2",
       "name": "10mm SDS Drill bit",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "id": "6",
       "listId": "3",
       "name": "Age of Empires IV",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "id": "7",
       "listId": "3",
       "name": "Starcraft Remastered HD",
       "quantity": 2,
-      "important": false
+      "important": true
     },
     {
       "listId": 0,
@@ -80,8 +80,50 @@
       "listId": 0,
       "name": "Bananas",
       "quantity": "3",
-      "important": true,
+      "important": false,
       "id": "8IHoZ1C"
+    },
+    {
+      "listId": 0,
+      "name": "Vleis",
+      "quantity": "4",
+      "important": true,
+      "id": "Fj_ehEb"
+    },
+    {
+      "name": "test",
+      "quantity": "1",
+      "important": false,
+      "listId": "0",
+      "id": "x4aZxgM"
+    },
+    {
+      "name": "t",
+      "quantity": "1",
+      "important": false,
+      "listId": "0",
+      "id": "u96kQkC"
+    },
+    {
+      "name": "te",
+      "quantity": "1",
+      "important": false,
+      "listId": "0",
+      "id": "CEfQDzG"
+    },
+    {
+      "name": "fds",
+      "quantity": "1",
+      "important": false,
+      "listId": "0",
+      "id": "LwUVb2c"
+    },
+    {
+      "name": "test",
+      "quantity": "1",
+      "important": false,
+      "listId": "0",
+      "id": "9iDe2A2"
     }
   ]
 }

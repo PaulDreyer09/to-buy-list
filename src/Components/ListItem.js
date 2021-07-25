@@ -1,7 +1,16 @@
+import {itemActionCreators} from '../state/index';
+import {bindActionCreators} from 'redux';
+import {useDispatch} from 'react-redux';
+
 const ListItem = (props) => {
+    const dispatch = useDispatch();
+    const {toggleItemImportant} = bindActionCreators(itemActionCreators, dispatch)
+    const toggleImportant = () => {
+        toggleItemImportant(props.item, props.itemIndex)
+    }
     //console.log(props.toggleImportant(props.listIndex, props.itemIndex));
     return( 
-    <div onDoubleClick={() => props.toggleImportant(props.listIndex, props.itemIndex)} className='ListItem'>        
+    <div onDoubleClick={toggleImportant} className='ListItem'>        
         {props.listItem.important ? <i className='fa fa-star'></i>: ''}
         <span>{props.listItem.name}</span>
         <div className='itemOptions'>
@@ -11,8 +20,7 @@ const ListItem = (props) => {
         </div>
         <div className="container listItemDetails">
             <span>Quantity: {props.listItem.quantity}</span>
-        </div>
-        
+        </div>        
         <div className='line'></div>      
     </div>
     );

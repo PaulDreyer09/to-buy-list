@@ -1,13 +1,17 @@
+import React, {useEffect, useState, useCallback} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import AppHeader from './Components/AppHeader';
 import ContentPage from './Components/ContentPage';
-import React, {useEffect, useState} from 'react';
+import {bindActionCreators} from 'redux';
+import {listActionCreators, itemActionCreators} from './state/index'
+
 
 function App() {
   const activities = [
-  {title: 'Main Menu' ,name: 'Main_Menu'},
-  {title: 'To Buy Lists' ,name: 'To_Buy_Lists'},
-  {title: 'Shopping Lists' ,name: 'Shopping_Lists'},
-  {title: 'Went Shopping' ,name: 'Went_Shopping'},]
+    {title: 'Main Menu' ,name: 'Main_Menu'},
+    {title: 'To Buy Lists' ,name: 'To_Buy_Lists'},
+    {title: 'Shopping Lists' ,name: 'Shopping_Lists'},
+    {title: 'Went Shopping' ,name: 'Went_Shopping'},]
 
   const [activity, setActivity] = useState('Main_Menu');//activity keeps track of the page that needs to be shown
   //activity names: Main_Menu, To_Buy_Lists
@@ -17,42 +21,63 @@ function App() {
   //List items for ToBuyListPage TEST use before adding database
   const [TBLList, setTBLList] = useState([]);
 
-  //Get data from server on start
+  const state = useSelector(state => state.list);
+  const dispatch = useDispatch();
+  const {fetchLists} = bindActionCreators(listActionCreators, dispatch);
+  const {fetchItems} = bindActionCreators(itemActionCreators, dispatch);
+  
+  // const getListsCallback = useCallback(() => fetchLists());
+  // const getItemsCallback = useCallback(() => fetchItems());
+
   useEffect(() => {
-    const getData = async () => {
-      const listsFromServer = await fetchTBLList();
-      const listItemsFromServer = await fetchListItems();
+    fetchLists();
+    fetchItems();
+  },[state]);
 
-      //Object holding all the lists and their listItems
-      let TBLList = [];
+  //Get data from server on start
+  //useEffect(() => {    
+    //getData();
+    // //**OLD WAYS */
+    // const getData = async () => {
+    //   const listsFromServer = await fetchTBLList();
+    //   const listItemsFromServer = await fetchListItems();
+
+    //   //TBLList
+    //   //Object holding all the lists and their listItems
+    //   //list format: {id, name, items, displayform, listType}
+    //   //id: List id
+    //   //items: Array of list items belonging to the list
+    //   //displayForm: boolean value for showing the form to add new items to the list    
+
+    //   let lists = [];
       
-      //Create list objects
-      listsFromServer.map((list, listIndex) => {   
-        let listItems = [];
+    //   //Create list objects
+    //   listsFromServer.map((list, listIndex) => {   
+    //     let listItems = [];
 
-        //traverse through the list and create listitems from each items data
-        listItemsFromServer.map((item) => {
-          if(item == null){
-            console.log("Eh something went wrong getting the lists");
-          }
-          if(item.listId == list.id){
-            listItems.push({
-              id: item.id,
-              name: item.name, 
-              quantity: item.quantity, 
-              important: item.important}
-              );
-          }
-        })
+    //     //traverse through the list and create listitems from each items data
+    //     listItemsFromServer.map((item) => {
+    //       if(item == null){
+    //         console.log("Eh something went wrong getting the lists");
+    //       }
+    //       if(item.listId == list.id){
+    //         listItems.push({
+    //           id: item.id,
+    //           name: item.name, 
+    //           quantity: item.quantity, 
+    //           important: item.important}
+    //           );
+    //       }
+    //     })
 
-        TBLList.push({id: list.id, name: list.name, items: listItems, displayForm: false, listType: list.listType});
-      })          
+    //     lists.push({id: list.id, name: list.name, items: listItems, displayForm: false, listType: list.listType});
+    //   })          
 
-      setTBLList(TBLList) ;
-    }
-    getData();
+    //   setTBLList(lists) ;
+    // }
+    // getData();
     
-  }, []);
+  //}, []);
 
   //Fetch TBLList
   const fetchTBLList = async () => {
@@ -232,12 +257,14 @@ function App() {
   }
 
   return (  
+
     <div className="App">
-       <div>
+       <div>{console.log(state)}
               <AppHeader 
                   title={title} 
                   handleBackButton={handleBackButton}
-                  displayBackButton={displayBackButton}/>
+                  displayBackButton={displayBackButton}
+              />
               <ContentPage 
                   activity={activity} 
                   TBLList={TBLList.filter((list) => {return list.listType == '0'})} //ToBuyList List
@@ -248,10 +275,38 @@ function App() {
                   handleMainMenuButton={handleMainMenuButton}                  
                   handleDeleteTBLListItem={handleDeleteTBLListItem}
                   handleTBLSubmitItemButton={handleTBLSubmitItemButton}                  
-                  toggleImportant={toggleImportant}/> 
+                  toggleImportant={toggleImportant}
+              /> 
+
           </div>
     </div>
   );
+
+  // return (  
+  //   <Provider store={store}>
+  //   <div className="App">
+  //      <div>
+  //             <AppHeader 
+  //                 title={title} 
+  //                 handleBackButton={handleBackButton}
+  //                 displayBackButton={displayBackButton}
+   //            />
+  //             <ContentPage 
+  //                 activity={activity} 
+  //                 TBLList={TBLList.filter((list) => {return list.listType == '0'})} //ToBuyList List
+  //                 SLList={TBLList.filter((list) => {return list.listType == '1'})}  //ShoppingList List 
+  //                 handleAddNewTBL={handleAddNewTBL}
+  //                 handleAddNewSL={handleAddNewSL}
+  //                 handleDeleteTBL={handleDeleteTBL}
+  //                 handleMainMenuButton={handleMainMenuButton}                  
+  //                 handleDeleteTBLListItem={handleDeleteTBLListItem}
+  //                 handleTBLSubmitItemButton={handleTBLSubmitItemButton}                  
+  //                 toggleImportant={toggleImportant}
+  //             /> 
+  //         </div>
+  //   </div>
+  //   </Provider>
+  // );
 }
 
 export default App;
