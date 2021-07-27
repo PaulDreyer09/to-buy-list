@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { itemActionCreators } from '../state/index';
 
-const AddItemForm = ({listIndex, handleTBLSubmitItemButton, listId}) => {
+const AddItemForm = ({listId, formData}) => {
 
     const dispatch = useDispatch();
     const {postItem} = bindActionCreators(itemActionCreators, dispatch);
 
-    const [formName, setFormName] = useState('');
-    const [formQuantity, setFormQuantity] = useState('1');
-    const [formImportant, setFormImportant] = useState(false);
+    const [formName, setFormName] = useState(formData.name);
+    const [formQuantity, setFormQuantity] = useState(formData.quantity);
+    const [formImportant, setFormImportant] = useState(formData.important);
 
     const handleChangeName = (e) => {
         setFormName(e.target.value);

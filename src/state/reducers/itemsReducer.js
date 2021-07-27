@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT} from '../action-creators/types';
+import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT, DELETE_ITEM} from '../action-creators/types';
 
 const initialState = {items: [],};
 
@@ -24,6 +24,15 @@ export default (state = initialState, action) => {
             newItemsList[index] = action.payload;
         
             return {...state, items: newItemsList};
+        case DELETE_ITEM:
+            //delete item from list            
+            let deleteItemsList = [...state.items]
+            const itemIndex = deleteItemsList.findIndex((item) => item.id == action.payload);
+            if(itemIndex > -1){
+                deleteItemsList.splice(itemIndex, 1);
+            }
+            return{...state, items: deleteItemsList};            
+
         default:
             return state;
     }

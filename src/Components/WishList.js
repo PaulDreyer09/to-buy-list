@@ -6,8 +6,10 @@ import AddItemForm from './AddItemForm';
 const WishList = (props) => {
     const state = useSelector(state => state.items); 
 
-    const [displayForm, setDisplayForm] = useState(false);
+    const [displayAddForm, setDisplayAddForm] = useState(false);    
     const [displayListItems, setDisplayListItems] = useState(true);
+    const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
+    const [editItemId, setEditItemId] = useState(undefined);
 
     console.log('state error', state.items);
 
@@ -16,16 +18,24 @@ const WishList = (props) => {
     const getList = () => {        
         return listItems.map((listItem, index) => (
             <ListItem 
-            key={index} 
-            item={listItem}
-            listId={props.list.id} 
-            itemIndex={index} 
-            listItem={listItem} />))
+                key={index} 
+                item={listItem}
+                listId={props.list.id} 
+                itemIndex={index} 
+                listItem={listItem}
+                handleEditItemButton={handleEditItemButton}     
+            />))
     }
 
     //toggle displayAddForm
     const handleAddItemButton = () => {
-        setDisplayForm(!displayForm);
+        setDisplayAddForm(!displayAddForm);
+    }
+
+    //toggle display form to edit an item
+    const handleEditItemButton = (itemId) => {
+        setDisplayEditItemForm()
+        setEditItemId(itemId);
     }
 
     const handleDropDownButton = () => {
@@ -51,18 +61,24 @@ const WishList = (props) => {
                 <h4 className='col-11'>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
-                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayForm ? 'Close' : 'Add Item'}</i></a>|
+                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddForm ? 'Close' : 'Add Item'}</i></a>|
                     <a onClick={handleEditListButton}> <i className='fa fa-edit button listOption'> Edit list</i></a>|
                     <a onClick={handleDeleteListButton}> <i className='fa fa-edit button listOption'> Delete list</i></a>
+
                 </div>
             </div>
             {
                     //Display a form to add a new item only after Add Item is clicked
                     //Also close all other forms
-                    displayForm?
+                    displayAddForm?
                     <AddItemForm 
                         listId={props.list.id}
-                        handleTBLSubmitItemButton={handleTBLSubmitItemButton}/>:''                    
+                        formData={
+                            {name : '', 
+                            quantity : 1, 
+                            important : false}}
+                        
+                    />:''                    
             }
             
             {//Show message if no items are in the list

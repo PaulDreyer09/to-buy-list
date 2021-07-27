@@ -8,6 +8,7 @@ import WishList from './WishList';
 
 const WishListsPage = (props) => {   
     const state = useSelector(state => state.lists);   
+
     //const dispatch = useDispatch();
     //const {fetchLists} = bindActionCreators(listActionCreators,dispatch );
 

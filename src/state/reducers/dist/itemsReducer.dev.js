@@ -63,6 +63,22 @@ var _default = function _default() {
         items: _newItemsList
       });
 
+    case _types.DELETE_ITEM:
+      //delete item from list            
+      var deleteItemsList = _toConsumableArray(state.items);
+
+      var itemIndex = deleteItemsList.findIndex(function (item) {
+        return item.id == action.payload;
+      });
+
+      if (itemIndex > -1) {
+        deleteItemsList.splice(itemIndex, 1);
+      }
+
+      return _objectSpread({}, state, {
+        items: deleteItemsList
+      });
+
     default:
       return state;
   }

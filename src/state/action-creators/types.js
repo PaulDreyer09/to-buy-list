@@ -2,4 +2,5 @@ export const FETCH_LISTS = 'FETCH_LISTS';
 
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const POST_ITEM = 'POST_ITEM';
+export const DELETE_ITEM ='DELETE_ITEM';
 export const TOGGLE_ITEM_IMPORTANT = 'TOGGLE_ITEM_IMPORTANT';

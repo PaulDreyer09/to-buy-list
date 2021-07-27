@@ -80,50 +80,29 @@
       "listId": 0,
       "name": "Bananas",
       "quantity": "3",
-      "important": false,
+      "important": true,
       "id": "8IHoZ1C"
     },
     {
       "listId": 0,
       "name": "Vleis",
       "quantity": "4",
-      "important": true,
+      "important": false,
       "id": "Fj_ehEb"
     },
     {
       "name": "test",
       "quantity": "1",
-      "important": false,
+      "important": true,
       "listId": "0",
       "id": "x4aZxgM"
     },
     {
-      "name": "t",
-      "quantity": "1",
-      "important": false,
-      "listId": "0",
-      "id": "u96kQkC"
-    },
-    {
-      "name": "te",
-      "quantity": "1",
-      "important": false,
-      "listId": "0",
-      "id": "CEfQDzG"
-    },
-    {
       "name": "fds",
       "quantity": "1",
-      "important": false,
+      "important": true,
       "listId": "0",
       "id": "LwUVb2c"
-    },
-    {
-      "name": "test",
-      "quantity": "1",
-      "important": false,
-      "listId": "0",
-      "id": "9iDe2A2"
     }
   ]
 }

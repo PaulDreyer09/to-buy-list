@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.toggleItemImportant = exports.postItem = exports.fetchItems = void 0;
+exports.deleteItem = exports.toggleItemImportant = exports.postItem = exports.fetchItems = void 0;
 
 var _types = require("./types");
 
@@ -21,6 +21,7 @@ var fetchItems = function fetchItems() {
     });
   };
 }; //POST ITEM
+//Parameter: created item object
 
 
 exports.fetchItems = fetchItems;
@@ -46,6 +47,7 @@ var postItem = function postItem(newItem) {
   };
 }; //PATCH TOGGLE ITEM IMPORTANT
 //Toggle important true or false in item
+//input item object
 
 
 exports.postItem = postItem;
@@ -68,6 +70,23 @@ var toggleItemImportant = function toggleItemImportant(item) {
       });
     });
   };
-};
+}; //DELETE ITEM
+//Parameter: item id
+
 
 exports.toggleItemImportant = toggleItemImportant;
+
+var deleteItem = function deleteItem(itemId) {
+  return function (dispatch) {
+    fetch("http://localhost:5000/listItems/".concat(itemId), {
+      method: 'DELETE'
+    }).then(function () {
+      return dispatch({
+        type: _types.DELETE_ITEM,
+        payload: itemId
+      });
+    });
+  };
+};
+
+exports.deleteItem = deleteItem;

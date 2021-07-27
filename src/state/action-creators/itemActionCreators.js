@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT} from './types';
+import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT, DELETE_ITEM} from './types';
 
 //FETCH ITEMS
 export const fetchItems = () => (dispatch) => {
@@ -11,6 +11,7 @@ export const fetchItems = () => (dispatch) => {
 }
 
 //POST ITEM
+//Parameter: created item object
 export const postItem = (newItem) => (dispatch) => {
     console.log('POST ITEM', newItem);
     fetch('http://localhost:5000/listItems', {
@@ -27,6 +28,7 @@ export const postItem = (newItem) => (dispatch) => {
 
 //PATCH TOGGLE ITEM IMPORTANT
 //Toggle important true or false in item
+//input item object
 export const toggleItemImportant = (item) => (dispatch) => {
     item.important = !item.important;
     fetch(`http://localhost:5000/listItems/${item.id}`, {
@@ -36,4 +38,11 @@ export const toggleItemImportant = (item) => (dispatch) => {
     })
     .then(res => res.json)
     .then(data => dispatch({type: TOGGLE_ITEM_IMPORTANT, payload: item}))
+}
+
+//DELETE ITEM
+//Parameter: item id
+export const deleteItem = (itemId) => (dispatch ) => {
+    fetch(`http://localhost:5000/listItems/${itemId}`, {method: 'DELETE'})
+    .then(() => dispatch({type: DELETE_ITEM, payload: itemId}))
 }
