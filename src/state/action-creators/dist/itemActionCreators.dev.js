@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteItem = exports.toggleItemImportant = exports.postItem = exports.fetchItems = void 0;
+exports.deleteItem = exports.updateItem = exports.postItem = exports.fetchItems = void 0;
 
 var _types = require("./types");
 
@@ -52,9 +52,8 @@ var postItem = function postItem(newItem) {
 
 exports.postItem = postItem;
 
-var toggleItemImportant = function toggleItemImportant(item) {
+var updateItem = function updateItem(item) {
   return function (dispatch) {
-    item.important = !item.important;
     fetch("http://localhost:5000/listItems/".concat(item.id), {
       method: 'PATCH',
       headers: {
@@ -65,7 +64,7 @@ var toggleItemImportant = function toggleItemImportant(item) {
       return res.json;
     }).then(function (data) {
       return dispatch({
-        type: _types.TOGGLE_ITEM_IMPORTANT,
+        type: _types.UPDATE_ITEM,
         payload: item
       });
     });
@@ -74,7 +73,7 @@ var toggleItemImportant = function toggleItemImportant(item) {
 //Parameter: item id
 
 
-exports.toggleItemImportant = toggleItemImportant;
+exports.updateItem = updateItem;
 
 var deleteItem = function deleteItem(itemId) {
   return function (dispatch) {

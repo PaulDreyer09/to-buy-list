@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import ListItem from './ListItem';
 import AddItemForm from './AddItemForm';
+import EditItemForm from './EditItemForm';
 
 const WishList = (props) => {
     const state = useSelector(state => state.items); 
@@ -10,8 +11,6 @@ const WishList = (props) => {
     const [displayListItems, setDisplayListItems] = useState(true);
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
     const [editItemId, setEditItemId] = useState(undefined);
-
-    console.log('state error', state.items);
 
     const listItems = state.items.filter((item => item.listId == props.list.id));
 
@@ -32,12 +31,6 @@ const WishList = (props) => {
         setDisplayAddForm(!displayAddForm);
     }
 
-    //toggle display form to edit an item
-    const handleEditItemButton = (itemId) => {
-        setDisplayEditItemForm()
-        setEditItemId(itemId);
-    }
-
     const handleDropDownButton = () => {
         setDisplayListItems(!displayListItems);
     }
@@ -50,8 +43,32 @@ const WishList = (props) => {
         //props.handleDeleteTBL(props.list.id);
     }
 
-    const handleTBLSubmitItemButton = () => {
+    //Set state for item to be edited and toggle display for the form to edit item
+    const handleEditItemButton = (id) => {
+        setDisplayEditItemForm(!displayEditItemForm);
+        setEditItemId(id);
+    }
 
+    const handleSubmitEditItem = (item) => {        
+        setDisplayEditItemForm(false);
+    }
+
+    //Generate EditItemForm for the item selected
+    const getEditItemForm = () => {
+        const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
+        const item = listItems[itemIndex];
+        console.log('EDIT ITEM',item)
+        
+        return <EditItemForm 
+            listId={props.list.id}
+            itemId={item.id}
+            formData={{                   
+                name: item.name, 
+                quantity: item.quantity, 
+                important: item.important
+            }}
+            handleSubmitEditItem={handleSubmitEditItem}
+        />
     }
 
 
@@ -67,19 +84,23 @@ const WishList = (props) => {
 
                 </div>
             </div>
+            <div className='form-container'>
             {
-                    //Display a form to add a new item only after Add Item is clicked
-                    //Also close all other forms
-                    displayAddForm?
-                    <AddItemForm 
-                        listId={props.list.id}
-                        formData={
-                            {name : '', 
-                            quantity : 1, 
-                            important : false}}
-                        
-                    />:''                    
+                //Display a form to add a new item only after Add Item is clicked
+                //Also close all other forms                
+                displayAddForm?
+                <AddItemForm 
+                    listId={props.list.id}
+                    formData={
+                        {name : '', 
+                        quantity : 1, 
+                        important : false}}
+                    
+                />:displayEditItemForm?
+                getEditItemForm(): ''                                  
+               
             }
+            </div>
             
             {//Show message if no items are in the list
                 displayListItems ? (

@@ -50,7 +50,7 @@ var _default = function _default() {
         items: listAfterPost
       });
 
-    case _types.TOGGLE_ITEM_IMPORTANT:
+    case _types.UPDATE_ITEM:
       //initialise new state data
       var _newItemsList = _toConsumableArray(state.items);
 

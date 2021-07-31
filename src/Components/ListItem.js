@@ -4,10 +4,17 @@ import {useDispatch} from 'react-redux';
 
 const ListItem = (props) => {
     const dispatch = useDispatch();
-    const {toggleItemImportant, deleteItem} = bindActionCreators(itemActionCreators, dispatch)
+    const {updateItem, deleteItem} = bindActionCreators(itemActionCreators, dispatch)
 
+    //Toggle Important on item
     const handleDoubleClick = () => {
-        toggleItemImportant(props.item, props.itemIndex)
+        let item = props.item;
+        item.important = !item.important;
+        updateItem(item);
+    }
+
+    const handleEditItemButton = () => {
+        props.handleEditItemButton(props.item.id);
     }
 
     const handleDeleteButton = () => {
@@ -22,8 +29,8 @@ const ListItem = (props) => {
         {props.listItem.important ? <i className='fa fa-star'></i>: ''}
         <span>{props.listItem.name}</span>
         <div className='itemOptions'>
-            <a href='#' className='addButton'><i className='fa fa-edit icon'></i></a>
-            <a href='#' onClick={handleDeleteButton} className='addButton'><i className='fa fa-trash icon'></i></a>
+            <a href='#' className='addButton' onClick={handleEditItemButton}><i className='fa fa-edit icon'></i></a>
+            <a href='#' className='addButton' onClick={handleDeleteButton}><i className='fa fa-trash icon'></i></a>
             <a href='#' className='addButton'><i className='fa fa-angle-down icon'></i></a>
         </div>
         <div className="container listItemDetails">

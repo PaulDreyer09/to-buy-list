@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT, DELETE_ITEM} from '../action-creators/types';
+import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM} from '../action-creators/types';
 
 const initialState = {items: [],};
 
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
             listAfterPost.push(createdItem) ;
             console.log("created item reducer", action);          
             return {...state, items: listAfterPost}
-        case TOGGLE_ITEM_IMPORTANT:
+        case UPDATE_ITEM:
             //initialise new state data
             let newItemsList = [...state.items];
             let index = newItemsList.findIndex((element) => element.id == action.payload.id);

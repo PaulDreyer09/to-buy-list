@@ -70,9 +70,9 @@
       "important": true
     },
     {
-      "listId": 0,
+      "listId": "0",
       "name": "Apples",
-      "quantity": "3",
+      "quantity": "7",
       "important": true,
       "id": "eAumjXE"
     },
@@ -89,20 +89,6 @@
       "quantity": "4",
       "important": false,
       "id": "Fj_ehEb"
-    },
-    {
-      "name": "test",
-      "quantity": "1",
-      "important": true,
-      "listId": "0",
-      "id": "x4aZxgM"
-    },
-    {
-      "name": "fds",
-      "quantity": "1",
-      "important": true,
-      "listId": "0",
-      "id": "LwUVb2c"
     }
   ]
 }

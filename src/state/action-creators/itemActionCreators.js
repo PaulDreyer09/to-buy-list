@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, TOGGLE_ITEM_IMPORTANT, DELETE_ITEM} from './types';
+import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM} from './types';
 
 //FETCH ITEMS
 export const fetchItems = () => (dispatch) => {
@@ -29,16 +29,17 @@ export const postItem = (newItem) => (dispatch) => {
 //PATCH TOGGLE ITEM IMPORTANT
 //Toggle important true or false in item
 //input item object
-export const toggleItemImportant = (item) => (dispatch) => {
-    item.important = !item.important;
+export const updateItem = (item) => (dispatch) => {
     fetch(`http://localhost:5000/listItems/${item.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(item)
     })
     .then(res => res.json)
-    .then(data => dispatch({type: TOGGLE_ITEM_IMPORTANT, payload: item}))
+    .then(data => dispatch({type: UPDATE_ITEM, payload: item}))
 }
+
+
 
 //DELETE ITEM
 //Parameter: item id
