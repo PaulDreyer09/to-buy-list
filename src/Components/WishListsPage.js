@@ -8,15 +8,15 @@ import AddListForm from './AddListForm';
 
 
 const WishListsPage = (props) => {   
-    const state = useSelector(state => state.lists);   
+    const state = useSelector(state => state.lists.wishLists);   
 
     //const dispatch = useDispatch();
     //const {fetchLists} = bindActionCreators(listActionCreators,dispatch );
-
+    console.log(state)
     const getLists = () => {
         let component = '';
-        if(state.wishLists.length > 0){            
-            component = state.wishLists.map((list, index) => {
+        if(state.length > 0){            
+            component = state.map((list, index) => {
                 return <WishList key={index} list={list} listIndex={index}/>
             })
         }
@@ -25,7 +25,7 @@ const WishListsPage = (props) => {
     return(
         <div className='WishListsPage'>
             <AddListForm/>
-            { state.wishLists.length > 0 ? <div>{getLists()}</div>: <div>Items not loaded</div>}         
+            { state.length > 0 ? <div>{getLists()}</div>: <div>Items not loaded</div>}         
         </div>
     
     )

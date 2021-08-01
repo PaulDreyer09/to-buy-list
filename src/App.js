@@ -9,7 +9,7 @@ import {listActionCreators, itemActionCreators} from './state/index'
 function App() {
   const activities = [
     {title: 'Main Menu' ,name: 'Main_Menu'},
-    {title: 'To Buy Lists' ,name: 'To_Buy_Lists'},
+    {title: 'Wishlists' ,name: 'Wish_Lists_Page'},
     {title: 'Shopping Lists' ,name: 'Shopping_Lists'},
     {title: 'Went Shopping' ,name: 'Went_Shopping'},]
 

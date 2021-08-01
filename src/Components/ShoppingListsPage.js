@@ -1,23 +1,21 @@
 import ShoppingList from './ShoppingList';
 import AddListForm from './AddListForm';
+import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { listActionCreators } from '../state';
 
 const ShoppingListsPage = (props) => {
     //console.log('ShoppingListsPage', props.TBLList);
+    const state = useSelector(state => state.lists.shoppingLists)
+    console.log(state);
     return(
     <div className='ShoppingListsPage'>
-        <AddListForm handleAddNewList={props.handleAddNewSL}/>
-        {props.SLList.length > 0 ? 
-            props.SLList.map((list, index) => {
-                return <ShoppingList key={index} 
-                    listIndex={index}
-                    list={list}            
-                    TBLList={props.TBLList}     
-                    handleSelectList={props.handleSelectList}
-                    handleTBLSubmitItemButton={props.handleTBLSubmitItemButton}
-                    handleDeleteTblListItem={props.handleDeleteTblListItem}
-                    handleDeleteTBL={props.handleDeleteTBL}
-                    toggleImportant={props.toggleImportant}></ShoppingList>}): 'Nothing to show'}
-
+        <AddListForm />
+        
+        { state.length > 0 ? 
+            state.map((list, index) => {
+                return <ShoppingList list={list}/>
+            }): 'Nothing to show'}
     </div>);
     }
 
