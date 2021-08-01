@@ -26,9 +26,8 @@ export const postItem = (newItem) => (dispatch) => {
     })
 }
 
-//PATCH TOGGLE ITEM IMPORTANT
-//Toggle important true or false in item
-//input item object
+//UPDATE ITEM
+//Parameter: item object with changes applied, DO NOT EDIT ID
 export const updateItem = (item) => (dispatch) => {
     fetch(`http://localhost:5000/listItems/${item.id}`, {
         method: 'PATCH',

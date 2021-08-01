@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { listActionCreators } from '../state';
 import ListItem from './ListItem';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
@@ -11,6 +14,9 @@ const WishList = (props) => {
     const [displayListItems, setDisplayListItems] = useState(true);
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
     const [editItemId, setEditItemId] = useState(undefined);
+
+    const dispatch = useDispatch();
+    const {deleteList} = bindActionCreators(listActionCreators, dispatch);
 
     const listItems = state.items.filter((item => item.listId == props.list.id));
 
@@ -28,7 +34,13 @@ const WishList = (props) => {
 
     //toggle displayAddForm
     const handleAddItemButton = () => {
-        setDisplayAddForm(!displayAddForm);
+        if(displayEditItemForm){
+            setDisplayEditItemForm(false);
+        }else{
+            setDisplayAddForm(!displayAddForm);
+        }
+
+        
     }
 
     const handleDropDownButton = () => {
@@ -40,11 +52,19 @@ const WishList = (props) => {
     }
 
     const handleDeleteListButton = () => {
-        //props.handleDeleteTBL(props.list.id);
+        if(listItems.length === 0){
+            console.log('DELETE LIST BUTTON PRESSED ON LIST', props.list.id);
+            deleteList(props.list);
+        }
+        else{
+            alert('Delete all items from list before deleting.');
+        }
+        
     }
 
     //Set state for item to be edited and toggle display for the form to edit item
     const handleEditItemButton = (id) => {
+        setDisplayAddForm(false);
         setDisplayEditItemForm(!displayEditItemForm);
         setEditItemId(id);
     }
@@ -78,7 +98,7 @@ const WishList = (props) => {
                 <h4 className='col-11'>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
-                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddForm ? 'Close' : 'Add Item'}</i></a>|
+                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddForm | displayEditItemForm ? 'Close' : 'Add Item'}</i></a>|
                     <a onClick={handleEditListButton}> <i className='fa fa-edit button listOption'> Edit list</i></a>|
                     <a onClick={handleDeleteListButton}> <i className='fa fa-edit button listOption'> Delete list</i></a>
 

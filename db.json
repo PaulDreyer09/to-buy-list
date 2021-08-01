@@ -70,25 +70,18 @@
       "important": true
     },
     {
-      "listId": "0",
-      "name": "Apples",
-      "quantity": "7",
-      "important": true,
-      "id": "eAumjXE"
-    },
-    {
-      "listId": 0,
-      "name": "Bananas",
-      "quantity": "3",
-      "important": true,
-      "id": "8IHoZ1C"
-    },
-    {
       "listId": 0,
       "name": "Vleis",
       "quantity": "4",
       "important": false,
       "id": "Fj_ehEb"
+    },
+    {
+      "name": "Apples",
+      "quantity": "5",
+      "important": false,
+      "listId": "0",
+      "id": "g6ozpi2"
     }
   ]
 }

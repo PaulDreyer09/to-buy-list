@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {listActionCreators} from '../state/index';
 import WishList from './WishList';
+import AddListForm from './AddListForm';
 
 
 
@@ -23,6 +24,7 @@ const WishListsPage = (props) => {
     }
     return(
         <div className='ToBuyListsPage'>
+            <AddListForm/>
             { state.wishLists.length > 0 ? <div>{getLists()}</div>: <div>Items not loaded</div>}         
         </div>
     

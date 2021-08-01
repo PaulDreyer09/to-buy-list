@@ -33,11 +33,12 @@ var _default = function _default() {
 
   switch (action.type) {
     //Fetch items from api and update state
+    //Payload: array of listItem objects
     case _types.FETCH_ITEMS:
       return _objectSpread({}, state, {
         items: action.payload
       });
-    //Toggle item important in api and update state
+    //Payload: new created list item
 
     case _types.POST_ITEM:
       var createdItem = action.payload;
@@ -49,6 +50,7 @@ var _default = function _default() {
       return _objectSpread({}, state, {
         items: listAfterPost
       });
+    //Payload: listItem with needed changes applied to it
 
     case _types.UPDATE_ITEM:
       //initialise new state data
@@ -62,6 +64,7 @@ var _default = function _default() {
       return _objectSpread({}, state, {
         items: _newItemsList
       });
+    //Payload: listItem id that needs to be deleted
 
     case _types.DELETE_ITEM:
       //delete item from list            

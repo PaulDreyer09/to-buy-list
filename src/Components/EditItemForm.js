@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { itemActionCreators } from '../state/index';
 
-const AddItemForm = ({itemId, listId, formData, handleSubmitEditItem}) => {
+const EditItemForm = ({itemId, listId, formData, handleSubmitEditItem}) => {
 
     const dispatch = useDispatch();
     const {updateItem} = bindActionCreators(itemActionCreators, dispatch);
@@ -56,7 +56,7 @@ const AddItemForm = ({itemId, listId, formData, handleSubmitEditItem}) => {
     //Close
     
     return(    
-        <div className='AddItemForm well'>
+        <div className='AddItemForm'>
             <form onSubmit={onSubmit}>
                 <div className='row'>
                     <label className='col-2'>Item Name</label>
@@ -87,4 +87,4 @@ const AddItemForm = ({itemId, listId, formData, handleSubmitEditItem}) => {
 
 }
 
-export default AddItemForm;
+export default EditItemForm;

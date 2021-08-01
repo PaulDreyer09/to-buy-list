@@ -45,9 +45,8 @@ var postItem = function postItem(newItem) {
       });
     });
   };
-}; //PATCH TOGGLE ITEM IMPORTANT
-//Toggle important true or false in item
-//input item object
+}; //UPDATE ITEM
+//Parameter: item object with changes applied, DO NOT EDIT ID
 
 
 exports.postItem = postItem;
