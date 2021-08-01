@@ -38,7 +38,7 @@ export default function(state = initialState, action){
         case DELETE_LIST:
             let afterDeleteLists = undefined;
             let listToDelete = action.payload;
-            let deleteIndex = -1;
+            let deleteIndex = undefined;
             
 
             if(listToDelete.listType == 0){
@@ -53,6 +53,26 @@ export default function(state = initialState, action){
                 deleteIndex = afterDeleteLists.findIndex((obj) => obj.id == listToDelete.id);
                 afterDeleteLists.splice(deleteIndex, 1);
                 return {...state, shoppingLists: afterDeleteLists};
+            }
+        
+        case UPDATE_LIST:
+            //Wishlist or Shopping
+            let afterUpdateList = undefined;
+            let updatedItem = action.payload;
+            let updateIndex = undefined;
+            
+            if(updatedItem.listType == 0){
+                afterUpdateList = [...state.wishLists];
+                updateIndex = afterUpdateList.findIndex((obj) => obj.id == updatedItem.id);
+                console.log('DELETE_INDEX',updateIndex);
+                afterUpdateList.splice(updateIndex, 1, updatedItem);
+                return {...state, wishLists: afterUpdateList};
+            }
+            else{
+                afterUpdateList = [...state.shoppingLists];
+                updateIndex = afterUpdateList.findIndex((obj) => obj.id == updatedItem.id);
+                afterUpdateList.splice(updateIndex, 1, updatedItem);
+                return {...state, shoppingLists: afterUpdateList};
             }
 
         default:

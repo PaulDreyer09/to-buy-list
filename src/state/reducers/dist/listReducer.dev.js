@@ -71,7 +71,7 @@ function _default() {
     case _types.DELETE_LIST:
       var afterDeleteLists = undefined;
       var listToDelete = action.payload;
-      var deleteIndex = -1;
+      var deleteIndex = undefined;
 
       if (listToDelete.listType == 0) {
         afterDeleteLists = _toConsumableArray(state.wishLists);
@@ -91,6 +91,33 @@ function _default() {
         afterDeleteLists.splice(deleteIndex, 1);
         return _objectSpread({}, state, {
           shoppingLists: afterDeleteLists
+        });
+      }
+
+    case _types.UPDATE_LIST:
+      //Wishlist or Shopping
+      var afterUpdateList = undefined;
+      var updatedItem = action.payload;
+      var updateIndex = undefined;
+
+      if (updatedItem.listType == 0) {
+        afterUpdateList = _toConsumableArray(state.wishLists);
+        updateIndex = afterUpdateList.findIndex(function (obj) {
+          return obj.id == updatedItem.id;
+        });
+        console.log('DELETE_INDEX', updateIndex);
+        afterUpdateList.splice(updateIndex, 1, updatedItem);
+        return _objectSpread({}, state, {
+          wishLists: afterUpdateList
+        });
+      } else {
+        afterUpdateList = _toConsumableArray(state.shoppingLists);
+        updateIndex = afterUpdateList.findIndex(function (obj) {
+          return obj.id == updatedItem.id;
+        });
+        afterUpdateList.splice(updateIndex, 1, updatedItem);
+        return _objectSpread({}, state, {
+          shoppingLists: afterUpdateList
         });
       }
 

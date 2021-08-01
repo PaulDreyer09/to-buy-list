@@ -6,6 +6,7 @@ import { listActionCreators } from '../state';
 import ListItem from './ListItem';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
+import EditListForm from './EditListForm';
 
 const WishList = (props) => {
     const state = useSelector(state => state.items); 
@@ -13,6 +14,7 @@ const WishList = (props) => {
     const [displayAddForm, setDisplayAddForm] = useState(false);    
     const [displayListItems, setDisplayListItems] = useState(true);
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
+    const [displayEditListForm, setDisplayEditListForm] = useState(false);
     const [editItemId, setEditItemId] = useState(undefined);
 
     const dispatch = useDispatch();
@@ -48,7 +50,7 @@ const WishList = (props) => {
     }
 
     const handleEditListButton = () => {
-        
+        setDisplayEditListForm(true);
     }
 
     const handleDeleteListButton = () => {
@@ -73,6 +75,10 @@ const WishList = (props) => {
         setDisplayEditItemForm(false);
     }
 
+    const handleCloseListEditForm = () => {
+        setDisplayEditListForm(false);
+    }
+
     //Generate EditItemForm for the item selected
     const getEditItemForm = () => {
         const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
@@ -91,10 +97,11 @@ const WishList = (props) => {
         />
     }
 
-
     return(
-        <div className='WishList ToBuyList shadow-box container'>
+        <div className='WishList shadow-box container'>
             <div className='listHeader row'>
+                                  
+                
                 <h4 className='col-11'>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
@@ -105,6 +112,14 @@ const WishList = (props) => {
                 </div>
             </div>
             <div className='form-container'>
+            
+            {//Display form to edit List name
+                displayEditListForm? 
+                <EditListForm 
+                    list={props.list} 
+                    handleCloseListEditForm={handleCloseListEditForm}
+                /> : ''
+            }  
             {
                 //Display a form to add a new item only after Add Item is clicked
                 //Also close all other forms                

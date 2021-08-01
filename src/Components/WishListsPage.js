@@ -23,7 +23,7 @@ const WishListsPage = (props) => {
         return component;
     }
     return(
-        <div className='ToBuyListsPage'>
+        <div className='WishListsPage'>
             <AddListForm/>
             { state.wishLists.length > 0 ? <div>{getLists()}</div>: <div>Items not loaded</div>}         
         </div>

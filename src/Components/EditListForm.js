@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux';
 import { listActionCreators } from '../state';
 
 //listType prop : 0 for WishList 1 for ShoppingList
-const AddListForm = ({listType}) =>{
+const EditListForm = ({list, handleCloseListEditForm}) =>{
     const [displayListForm, setDisplayListForm] = useState(false);
     const [formName, setFormName] = useState('');
 
     const dispatch = useDispatch();
-    const {postList} = bindActionCreators(listActionCreators, dispatch)
+    const {updateList} = bindActionCreators(listActionCreators, dispatch)
 
     //Form name text change
     const onChange = (e) => {
@@ -20,35 +20,34 @@ const AddListForm = ({listType}) =>{
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log('submit form clicked');
-        const list = {name: formName, listType: 0};
+        if(formName != ''){
+            list.name = formName;
+            updateList(list);   
+            handleCloseListEditForm();
+        }
+        else{
+            alert('Enter a name for the form');
+        }     
+    }
 
-        postList(list);
-
-        setFormName('');
-        setDisplayListForm(false);
-        
+    const onCancel = (e) => {
+        e.preventDefault();
+        handleCloseListEditForm();
     }
 
     return (
-        <div className='AddListForm listForm shadow-box'>
-        
-        {displayListForm ?
+        <div className='EditListForm listForm shadow-box'>
             <form onSubmit={onSubmit}>
                 <div className='row container container-fluid'>
                     <label className='col-2'>List Name</label>
                     <input className='col-6' type='text'  value={formName} onChange={onChange}/>
                     <button className='col-2 btn btn-dark col-md-offset-2' type='submit'>Submit</button>
-                    <button className='btn btn-dark col-2' onClick={() => {setDisplayListForm(!displayListForm)}}>Cancel</button>
+                    <button className='btn btn-dark col-2' onClick={onCancel}>Cancel</button>
                 </div>
-            </form> : 
-            <button className='btn btn-dark btn-block' onClick={() => {setDisplayListForm(!displayListForm)}}>New List</button>
-        }
-            
-
-        
-    </div>
+            </form>                   
+        </div>
     );
     
 }
 
-export default AddListForm;
+export default EditListForm;
