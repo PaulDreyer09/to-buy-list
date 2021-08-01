@@ -1,5 +1,10 @@
+---Wishlists
 Delete item button *
 Edit item button *
 Add list * 
-Edit List
-Delete List
+Edit List *
+Delete List *
+
+---Shopping Lists: 
+Add item from Wishlists
+Add custom item

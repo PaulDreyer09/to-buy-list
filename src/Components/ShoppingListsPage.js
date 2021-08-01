@@ -14,7 +14,7 @@ const ShoppingListsPage = (props) => {
         
         { state.length > 0 ? 
             state.map((list, index) => {
-                return <ShoppingList list={list}/>
+                return <ShoppingList key={list.id} list={list}/>
             }): 'Nothing to show'}
     </div>);
     }

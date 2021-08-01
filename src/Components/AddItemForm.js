@@ -76,6 +76,7 @@ const AddItemForm = ({listId, formData}) => {
                 
                 <input type='submit' value='Submit'/>
             </form>
+            <hr/>
         </div>
     );
 

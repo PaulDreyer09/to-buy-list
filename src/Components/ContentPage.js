@@ -1,5 +1,4 @@
 import MainMenuButtons from './MainMenuButtons';
-import ToBuyListsPage from './ToBuyListsPage';
 import ShoppingListsPage from './ShoppingListsPage';
 import WishListsPage from './WishListsPage';
 function ContentPage(props){    

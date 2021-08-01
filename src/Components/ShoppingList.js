@@ -9,19 +9,24 @@ import EditItemForm from './EditItemForm';
 import EditListForm from './EditListForm';
 
 const ShoppingList = (props) => {
-    console.log('ShoppingList', props.TBLList)
-    const state = useSelector(state => state.items); 
 
-    const [displayAddForm, setDisplayAddForm] = useState(false);    
+    const listItems = useSelector(state => state.items.items.filter((item => item.listId == props.list.id))); 
+    const wishLists = useSelector(state => state.lists.wishLists);
+
+    const [displayAddNewItemForm, setDisplayAddNewItemForm] = useState(false);
+    const [displayAddItemFromListForm, setDisplayAddItemFromListForm] = useState(false);
+
+    const [displayAddItemForm, setDisplayAddItemForm] = useState(false);    
     const [displayListItems, setDisplayListItems] = useState(true);
+
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
-    const [displayEditListForm, setDisplayEditListForm] = useState(false);
+    const [displayEditListForm, setDisplayEditListForm] = useState(false);    
     const [editItemId, setEditItemId] = useState(undefined);
+
+    const [selectedWishList, setSelectedWishList] = useState(undefined);
 
     const dispatch = useDispatch();
     const {deleteList} = bindActionCreators(listActionCreators, dispatch);
-
-    const listItems = state.items.filter((item => item.listId == props.list.id));
 
     const getList = () => {        
         return listItems.map((listItem, index) => (
@@ -40,10 +45,8 @@ const ShoppingList = (props) => {
         if(displayEditItemForm){
             setDisplayEditItemForm(false);
         }else{
-            setDisplayAddForm(!displayAddForm);
-        }
-
-        
+            setDisplayAddItemForm(!displayAddItemForm);
+        }        
     }
 
     const handleDropDownButton = () => {
@@ -67,7 +70,7 @@ const ShoppingList = (props) => {
 
     //Set state for item to be edited and toggle display for the form to edit item
     const handleEditItemButton = (id) => {
-        setDisplayAddForm(false);
+        setDisplayAddItemForm(false);
         setDisplayEditItemForm(!displayEditItemForm);
         setEditItemId(id);
     }
@@ -78,6 +81,16 @@ const ShoppingList = (props) => {
 
     const handleCloseListEditForm = () => {
         setDisplayEditListForm(false);
+    }
+
+    const handleNewItem = () => {
+        setDisplayAddNewItemForm(true);
+        setDisplayAddItemFromListForm(false);
+    }
+
+    const handleAddItemFromList = () => {        
+        setDisplayAddItemFromListForm(true);
+        setDisplayAddNewItemForm(false);
     }
 
     //Generate EditItemForm for the item selected
@@ -104,7 +117,7 @@ const ShoppingList = (props) => {
                 <h4 className='col-11'>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
-                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddForm | displayEditItemForm ? 'Close' : 'Add Item'}</i></a>|
+                    <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddItemForm | displayEditItemForm ? 'Close' : 'Add Item'}</i></a>|
                     <a onClick={handleEditListButton}> <i className='fa fa-edit button listOption'> Edit list</i></a>|
                     <a onClick={handleDeleteListButton}> <i className='fa fa-edit button listOption'> Delete list</i></a>
 
@@ -122,15 +135,22 @@ const ShoppingList = (props) => {
             {
                 //Display a form to add a new item only after Add Item is clicked
                 //Also close all other forms                
-                displayAddForm?
-                <AddItemForm 
-                    listId={props.list.id}
-                    formData={
-                        {name : '', 
-                        quantity : 1, 
-                        important : false}}
-                    
-                />:displayEditItemForm?
+                displayAddItemForm?
+                <div>
+                    <button onClick={handleAddItemFromList}>From WishList</button>
+                    <button onClick={handleNewItem}>New Item</button>
+                    {displayAddNewItemForm ?
+                        <AddItemForm 
+                            listId={props.list.id}
+                            formData={
+                            {name : '', 
+                            quantity : 1, 
+                            important : false}}                    
+                        /> 
+                        : '' 
+                    }
+                </div>
+                :displayEditItemForm?
                 getEditItemForm(): ''                                  
                
             }
