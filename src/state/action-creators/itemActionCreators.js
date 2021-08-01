@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM} from './types';
+import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM, SELECT_ITEM_LIST_DATA} from './types';
 
 //FETCH ITEMS
 export const fetchItems = () => (dispatch) => {
@@ -46,3 +46,12 @@ export const deleteItem = (itemId) => (dispatch ) => {
     fetch(`http://localhost:5000/listItems/${itemId}`, {method: 'DELETE'})
     .then(() => dispatch({type: DELETE_ITEM, payload: itemId}))
 }
+
+//Initialise items list data for SelectItemsList component
+//Parameters: list of items from the selected list
+export const setSelectItemListData = (listId) => (dispatch) =>{
+    dispatch({type: SELECT_ITEM_LIST_DATA, payload: listId});
+}
+
+
+//const [selectedItems, setSelectedItems] = useState(listItems.map(item => {return {name: item.name, checked: false}}));

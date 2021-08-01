@@ -22,16 +22,18 @@ function App() {
   const [TBLList, setTBLList] = useState([]);
 
   const state = useSelector(state => state.list);
+  console.log(state)
+
   const dispatch = useDispatch();
-  const {fetchLists} = bindActionCreators(listActionCreators, dispatch);
+  const {fetchLists, selectList} = bindActionCreators(listActionCreators, dispatch);
   const {fetchItems} = bindActionCreators(itemActionCreators, dispatch);
   
   // const getListsCallback = useCallback(() => fetchLists());
   // const getItemsCallback = useCallback(() => fetchItems());
 
-  useEffect(() => {
+  useEffect(() => {    
     fetchLists();
-    fetchItems();
+    fetchItems();        
   },[state]);
 
   //Get data from server on start
@@ -259,8 +261,7 @@ function App() {
   return (  
 
     <div className="App">
-       <div>{console.log(state)}
-              <AppHeader 
+       <div><AppHeader 
                   title={title} 
                   handleBackButton={handleBackButton}
                   displayBackButton={displayBackButton}

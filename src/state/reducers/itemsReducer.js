@@ -1,9 +1,11 @@
-import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM} from '../action-creators/types';
+import SelectItemList from '../../Components/SelectItemList';
+import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM, SELECT_ITEM_LIST_DATA} from '../action-creators/types';
 
-const initialState = {items: [],};
+const initialState = {items: [], selectItemsList: []};
 
 export default (state = initialState, action) => {
     let newItemsList = [...state.items];
+    
 
     switch (action.type) {
         //Fetch items from api and update state
@@ -34,7 +36,11 @@ export default (state = initialState, action) => {
             if(itemIndex > -1){
                 deleteItemsList.splice(itemIndex, 1);
             }
-            return{...state, items: deleteItemsList};            
+            return{...state, items: deleteItemsList};    
+            
+        case SELECT_ITEM_LIST_DATA: 
+            let selectItemsList = state.items.filter((item) => item.listId == action.payload);
+            return{...state, selectItemsList: selectItemsList};
 
         default:
             return state;

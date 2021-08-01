@@ -7,7 +7,6 @@ import { listActionCreators } from '../state';
 const ShoppingListsPage = (props) => {
     //console.log('ShoppingListsPage', props.TBLList);
     const state = useSelector(state => state.lists.shoppingLists)
-    console.log(state);
     return(
     <div className='ShoppingListsPage'>
         <AddListForm />

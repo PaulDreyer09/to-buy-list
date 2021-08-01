@@ -4,6 +4,7 @@ import {POST_LIST, FETCH_LISTS, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  '..
 const initialState = {    
     wishLists: [],
     shoppingLists: [],
+    selectedList: undefined
 }
 
 export default function(state = initialState, action){
@@ -45,7 +46,7 @@ export default function(state = initialState, action){
             if(listToDelete.listType == 0){
                 afterDeleteLists = [...state.wishLists];
                 deleteIndex = afterDeleteLists.findIndex((obj) => obj.id == listToDelete.id);
-                console.log('DELETE_INDEX',deleteIndex);
+                //console.log('DELETE_INDEX',deleteIndex);
                 afterDeleteLists.splice(deleteIndex, 1);
                 return {...state, wishLists: afterDeleteLists};
             }
@@ -65,7 +66,7 @@ export default function(state = initialState, action){
             if(updatedItem.listType == 0){
                 afterUpdateList = [...state.wishLists];
                 updateIndex = afterUpdateList.findIndex((obj) => obj.id == updatedItem.id);
-                console.log('DELETE_INDEX',updateIndex);
+                //console.log('DELETE_INDEX',updateIndex);
                 afterUpdateList.splice(updateIndex, 1, updatedItem);
                 return {...state, wishLists: afterUpdateList};
             }
@@ -80,7 +81,6 @@ export default function(state = initialState, action){
                 let selectedListId = action.payload
                 let selectedListIndex = state.wishLists.findIndex(list => list.id === selectedListId);
                 let selectedList = state.wishLists[selectedListIndex];
-                console.log(SELECT_LIST, selectedList.name)
                 return {...state, selectedList: selectedList};
         default:
             return state;

@@ -25,7 +25,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   wishLists: [],
-  shoppingLists: []
+  shoppingLists: [],
+  selectedList: undefined
 };
 
 function _default() {
@@ -79,8 +80,8 @@ function _default() {
         afterDeleteLists = _toConsumableArray(state.wishLists);
         deleteIndex = afterDeleteLists.findIndex(function (obj) {
           return obj.id == listToDelete.id;
-        });
-        console.log('DELETE_INDEX', deleteIndex);
+        }); //console.log('DELETE_INDEX',deleteIndex);
+
         afterDeleteLists.splice(deleteIndex, 1);
         return _objectSpread({}, state, {
           wishLists: afterDeleteLists
@@ -106,8 +107,8 @@ function _default() {
         afterUpdateList = _toConsumableArray(state.wishLists);
         updateIndex = afterUpdateList.findIndex(function (obj) {
           return obj.id == updatedItem.id;
-        });
-        console.log('DELETE_INDEX', updateIndex);
+        }); //console.log('DELETE_INDEX',updateIndex);
+
         afterUpdateList.splice(updateIndex, 1, updatedItem);
         return _objectSpread({}, state, {
           wishLists: afterUpdateList
@@ -129,7 +130,6 @@ function _default() {
         return list.id === selectedListId;
       });
       var selectedList = state.wishLists[selectedListIndex];
-      console.log(_types.SELECT_LIST, selectedList.name);
       return _objectSpread({}, state, {
         selectedList: selectedList
       });

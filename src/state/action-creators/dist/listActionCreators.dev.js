@@ -9,11 +9,10 @@ var _types = require("./types");
 
 var fetchLists = function fetchLists() {
   return function (dispatch) {
-    console.log('fetchList action called');
+    //console.log('fetchList action called');
     fetch('http://localhost:5000/lists').then(function (res) {
       return res.json();
     }).then(function (data) {
-      //console.log('fetchLists', lists)
       return dispatch({
         type: _types.FETCH_LISTS,
         payload: data

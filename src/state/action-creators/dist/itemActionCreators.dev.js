@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteItem = exports.updateItem = exports.postItem = exports.fetchItems = void 0;
+exports.setSelectItemListData = exports.deleteItem = exports.updateItem = exports.postItem = exports.fetchItems = void 0;
 
 var _types = require("./types");
 
@@ -85,6 +85,20 @@ var deleteItem = function deleteItem(itemId) {
       });
     });
   };
-};
+}; //Initialise items list data for SelectItemsList component
+//Parameters: list of items from the selected list
+
 
 exports.deleteItem = deleteItem;
+
+var setSelectItemListData = function setSelectItemListData(listId) {
+  return function (dispatch) {
+    dispatch({
+      type: _types.SELECT_ITEM_LIST_DATA,
+      payload: listId
+    });
+  };
+}; //const [selectedItems, setSelectedItems] = useState(listItems.map(item => {return {name: item.name, checked: false}}));
+
+
+exports.setSelectItemListData = setSelectItemListData;

@@ -8,11 +8,14 @@ import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
 import EditListForm from './EditListForm';
 import SelectList from './SelectList';
+import SelectItemList from './SelectItemList';
 
-const ShoppingList = (props) => {
-
+const ShoppingList = (props) => {    
     const listItems = useSelector(state => state.items.items.filter((item => item.listId == props.list.id))); 
     const wishLists = useSelector(state => state.lists.wishLists);
+    const selectedList = useSelector(state => state.lists.selectedList);
+    const selectedListItems = useSelector(state => (selectedList == undefined) ? [] : state.items.items.filter(item => item.listId == selectedList.id ))
+    //console.log(selectedListItems);
 
     const [displayAddNewItemForm, setDisplayAddNewItemForm] = useState(false);
     const [displayAddItemFromListForm, setDisplayAddItemFromListForm] = useState(false);
@@ -24,10 +27,8 @@ const ShoppingList = (props) => {
     const [displayEditListForm, setDisplayEditListForm] = useState(false);    
     const [editItemId, setEditItemId] = useState(undefined);
 
-    const [selectedWishList, setSelectedWishList] = useState(undefined);
-
     const dispatch = useDispatch();
-    const {deleteList} = bindActionCreators(listActionCreators, dispatch);
+    const {deleteList, selec} = bindActionCreators(listActionCreators, dispatch);
 
     const getList = () => {        
         return listItems.map((listItem, index) => (
@@ -60,7 +61,7 @@ const ShoppingList = (props) => {
 
     const handleDeleteListButton = () => {
         if(listItems.length === 0){
-            console.log('DELETE LIST BUTTON PRESSED ON LIST', props.list.id);
+            //console.log('DELETE LIST BUTTON PRESSED ON LIST', props.list.id);
             deleteList(props.list);
         }
         else{
@@ -98,7 +99,6 @@ const ShoppingList = (props) => {
     const getEditItemForm = () => {
         const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
         const item = listItems[itemIndex];
-        console.log('EDIT ITEM',item)
         
         return <EditItemForm 
             listId={props.list.id}
@@ -148,7 +148,15 @@ const ShoppingList = (props) => {
                             quantity : 1, 
                             important : false}}                    
                         /> 
-                        : <SelectList/> 
+                        : displayAddItemFromListForm? <SelectList/> 
+                        : ''
+                    }
+                    { selectedList != undefined ? <SelectItemList 
+                        wishListId = {selectedList.id} 
+                        shoppingListId = {props.list.id}
+                        listItems = {selectedListItems} 
+                        checkItems = {selectedListItems.map(item => {return {name: item.name, checked: false}})}/>  
+                        : ''
                     }
                 </div>
                 :displayEditItemForm?

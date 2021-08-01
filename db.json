@@ -28,13 +28,6 @@
   ],
   "listItems": [
     {
-      "id": "2",
-      "listId": "1",
-      "name": "Steel Point Boots",
-      "quantity": 2,
-      "important": true
-    },
-    {
       "id": "3",
       "listId": "1",
       "name": "Cargo Shorts",
@@ -70,7 +63,7 @@
       "important": true
     },
     {
-      "listId": 0,
+      "listId": "iYD7Jnc",
       "name": "Vleis",
       "quantity": "4",
       "important": false,
@@ -82,6 +75,13 @@
       "important": false,
       "listId": "0",
       "id": "g6ozpi2"
+    },
+    {
+      "name": "socks",
+      "quantity": 1,
+      "important": false,
+      "listId": "iYD7Jnc",
+      "id": "0SfO95O"
     }
   ]
 }

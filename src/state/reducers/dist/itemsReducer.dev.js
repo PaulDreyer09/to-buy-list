@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
+var _SelectItemList = _interopRequireDefault(require("../../Components/SelectItemList"));
+
 var _types = require("../action-creators/types");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -22,7 +26,8 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var initialState = {
-  items: []
+  items: [],
+  selectItemsList: []
 };
 
 var _default = function _default() {
@@ -80,6 +85,14 @@ var _default = function _default() {
 
       return _objectSpread({}, state, {
         items: deleteItemsList
+      });
+
+    case _types.SELECT_ITEM_LIST_DATA:
+      var selectItemsList = state.items.filter(function (item) {
+        return item.listId == action.payload;
+      });
+      return _objectSpread({}, state, {
+        selectItemsList: selectItemsList
       });
 
     default:

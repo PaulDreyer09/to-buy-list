@@ -1,11 +1,10 @@
 import {FETCH_LISTS, POST_LIST, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  './types';
 
 export const fetchLists = () => (dispatch) =>{
-    console.log('fetchList action called');
+    //console.log('fetchList action called');
     fetch('http://localhost:5000/lists')
     .then(res => res.json())
     .then((data) => {
-        //console.log('fetchLists', lists)
         return dispatch({type: FETCH_LISTS, payload: data})
     });
 }
@@ -45,7 +44,7 @@ export const updateList = (list) => (dispatch) => {
     .then(data => dispatch({type: UPDATE_LIST, payload: list}));
 }
 
-export const selectList = (listId) => (dispatch) => {
+export const selectList = (listId) => (dispatch) => {    
     dispatch({type: SELECT_LIST, payload: listId});
 }
 
