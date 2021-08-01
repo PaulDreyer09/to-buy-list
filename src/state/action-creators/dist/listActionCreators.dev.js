@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateList = exports.deleteList = exports.postList = exports.fetchLists = void 0;
+exports.selectList = exports.updateList = exports.deleteList = exports.postList = exports.fetchLists = void 0;
 
 var _types = require("./types");
 
@@ -86,21 +86,17 @@ var updateList = function updateList(list) {
       });
     });
   };
-}; // export const updateItem = (item) => (dispatch) => {
-//     fetch(`http://localhost:5000/listItems/${item.id}`, {
-//         method: 'PATCH',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(item)
-//     })
-//     .then(res => res.json)
-//     .then(data => dispatch({type: UPDATE_ITEM, payload: item}));
-// }
-// //DELETE ITEM
-// //Parameter: item id
-// export const deleteItem = (itemId) => (dispatch ) => {
-//     fetch(`http://localhost:5000/listItems/${itemId}`, {method: 'DELETE'})
-//     .then(() => dispatch({type: DELETE_ITEM, payload: itemId}));
-// }
-
+};
 
 exports.updateList = updateList;
+
+var selectList = function selectList(listId) {
+  return function (dispatch) {
+    dispatch({
+      type: _types.SELECT_LIST,
+      payload: listId
+    });
+  };
+};
+
+exports.selectList = selectList;

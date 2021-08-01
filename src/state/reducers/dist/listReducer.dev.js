@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = _default;
 
+var _listActionCreators = require("../action-creators/listActionCreators");
+
 var _types = require("../action-creators/types");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -120,6 +122,17 @@ function _default() {
           shoppingLists: afterUpdateList
         });
       }
+
+    case _types.SELECT_LIST:
+      var selectedListId = action.payload;
+      var selectedListIndex = state.wishLists.findIndex(function (list) {
+        return list.id === selectedListId;
+      });
+      var selectedList = state.wishLists[selectedListIndex];
+      console.log(_types.SELECT_LIST, selectedList.name);
+      return _objectSpread({}, state, {
+        selectedList: selectedList
+      });
 
     default:
       return state;

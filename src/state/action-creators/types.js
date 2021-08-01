@@ -2,6 +2,7 @@ export const FETCH_LISTS = 'FETCH_LISTS';
 export const POST_LIST = 'POST_LIST'
 export const DELETE_LIST = 'DELETE_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
+export const SELECT_LIST = 'SELECT_LIST';
 
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const POST_ITEM = 'POST_ITEM';

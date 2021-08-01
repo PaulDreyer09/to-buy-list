@@ -1,4 +1,4 @@
-import {FETCH_LISTS, POST_LIST, DELETE_LIST, UPDATE_LIST} from  './types';
+import {FETCH_LISTS, POST_LIST, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  './types';
 
 export const fetchLists = () => (dispatch) =>{
     console.log('fetchList action called');
@@ -45,26 +45,7 @@ export const updateList = (list) => (dispatch) => {
     .then(data => dispatch({type: UPDATE_LIST, payload: list}));
 }
 
+export const selectList = (listId) => (dispatch) => {
+    dispatch({type: SELECT_LIST, payload: listId});
+}
 
-
-
-
-
-// export const updateItem = (item) => (dispatch) => {
-//     fetch(`http://localhost:5000/listItems/${item.id}`, {
-//         method: 'PATCH',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(item)
-//     })
-//     .then(res => res.json)
-//     .then(data => dispatch({type: UPDATE_ITEM, payload: item}));
-// }
-
-
-
-// //DELETE ITEM
-// //Parameter: item id
-// export const deleteItem = (itemId) => (dispatch ) => {
-//     fetch(`http://localhost:5000/listItems/${itemId}`, {method: 'DELETE'})
-//     .then(() => dispatch({type: DELETE_ITEM, payload: itemId}));
-// }

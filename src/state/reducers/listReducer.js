@@ -1,4 +1,5 @@
-import {POST_LIST, FETCH_LISTS, DELETE_LIST, UPDATE_LIST} from  '../action-creators/types';
+import { selectList } from '../action-creators/listActionCreators';
+import {POST_LIST, FETCH_LISTS, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  '../action-creators/types';
 
 const initialState = {    
     wishLists: [],
@@ -75,6 +76,12 @@ export default function(state = initialState, action){
                 return {...state, shoppingLists: afterUpdateList};
             }
 
+            case SELECT_LIST: 
+                let selectedListId = action.payload
+                let selectedListIndex = state.wishLists.findIndex(list => list.id === selectedListId);
+                let selectedList = state.wishLists[selectedListIndex];
+                console.log(SELECT_LIST, selectedList.name)
+                return {...state, selectedList: selectedList};
         default:
             return state;
     }

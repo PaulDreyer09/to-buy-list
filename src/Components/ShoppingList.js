@@ -7,6 +7,7 @@ import ListItem from './ListItem';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
 import EditListForm from './EditListForm';
+import SelectList from './SelectList';
 
 const ShoppingList = (props) => {
 
@@ -147,7 +148,7 @@ const ShoppingList = (props) => {
                             quantity : 1, 
                             important : false}}                    
                         /> 
-                        : '' 
+                        : <SelectList/> 
                     }
                 </div>
                 :displayEditItemForm?
