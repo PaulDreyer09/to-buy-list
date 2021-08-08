@@ -6,7 +6,7 @@ import { itemActionCreators } from '../state/index';
 const AddItemForm = ({listId, formData}) => {
 
     const dispatch = useDispatch();
-    const {postItem} = bindActionCreators(itemActionCreators, dispatch);
+    const {postItem, setSelectItemListData} = bindActionCreators(itemActionCreators, dispatch);
 
     const [formName, setFormName] = useState(formData.name);
     const [formQuantity, setFormQuantity] = useState(formData.quantity);
@@ -41,6 +41,7 @@ const AddItemForm = ({listId, formData}) => {
         };
 
         postItem(item);
+        setSelectItemListData(item.listId);
 
         setFormName('');
         setFormQuantity('1');

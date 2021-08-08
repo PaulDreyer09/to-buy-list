@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM, SELECT_ITEM_LIST_DATA} from './types';
+import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM, SELECT_ITEM_LIST_DATA, REMOVE_ITEM_LIST_DATA, CHECK_SELECT_ITEM} from './types';
 
 //FETCH ITEMS
 export const fetchItems = () => (dispatch) => {
@@ -53,5 +53,12 @@ export const setSelectItemListData = (listId) => (dispatch) =>{
     dispatch({type: SELECT_ITEM_LIST_DATA, payload: listId});
 }
 
+export const removeItemListData = () => (dispatch) =>{
+    dispatch({type: REMOVE_ITEM_LIST_DATA, payload: {}});
+}
+
+export const checkItem = (itemId) => (dispatch) => {
+    dispatch({type: CHECK_SELECT_ITEM, payload: itemId});
+}
 
 //const [selectedItems, setSelectedItems] = useState(listItems.map(item => {return {name: item.name, checked: false}}));

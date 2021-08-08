@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectList = exports.updateList = exports.deleteList = exports.postList = exports.fetchLists = void 0;
+exports.removeSelectedList = exports.selectList = exports.updateList = exports.deleteList = exports.postList = exports.fetchLists = void 0;
 
 var _types = require("./types");
 
@@ -99,3 +99,14 @@ var selectList = function selectList(listId) {
 };
 
 exports.selectList = selectList;
+
+var removeSelectedList = function removeSelectedList() {
+  return function (dispatch) {
+    dispatch({
+      type: _types.REMOVE_SELECT_LIST,
+      payload: {}
+    });
+  };
+};
+
+exports.removeSelectedList = removeSelectedList;

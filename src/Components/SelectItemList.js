@@ -9,25 +9,24 @@ const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
 
     const state = useSelector(state => state);
     const selectedItems = useSelector(state => state.items.selectItemsList)
-    const {updateItem} = bindActionCreators(itemActionCreators, dispatch);
-    const [checkedItems, setCheckedItems] = useState(selectedItems.map((item) => {return {id: item.id, name: item.name, checked: false}}));
+    const {updateItem, checkItem} = bindActionCreators(itemActionCreators, dispatch);
 
-    useEffect(()=>{setCheckedItems(selectedItems.map((item) => {return {id: item.id, name: item.name, checked: false}}))},state);
-
-    console.log(checkedItems);
+    console.log(selectedItems);
 
 
-    const checkItem = (index) => {
-        let newCheckedItems = [...checkedItems];
-        const item = checkedItems[index];
-        newCheckedItems[index] = {id: item.id, name: item.name, checked: !item.checked}
-        setCheckedItems(newCheckedItems);
+    const handleCheckItem = (index) => {
+        
+        const item = selectedItems[index];
+        console.log('checked item ' + item.checked)
+        checkItem(item.data.id)
+        // newCheckedItems[index] = {id: item.id, name: item.name, checked: !item.checked}
+        // setCheckedItems(newCheckedItems);
     }
 
     const onChange = (event) => {        
         let index = event.target.value;
         let selectedItem = listItems[index].id;
-        checkItem(index)
+        handleCheckItem(index)
     }
 
     const updateItems = (items) => {
@@ -41,8 +40,7 @@ const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const updateItemsList = selectedItems.filter((item, index) => {
-            const result = item.id === checkedItems[index].id && checkedItems[index].checked;
-            checkedItems[index].checked = false;
+            const result = item.id === selectedItems[index].data.id && selectedItems[index].checked;
             return result;
         })
         updateItems(updateItemsList);

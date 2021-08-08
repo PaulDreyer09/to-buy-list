@@ -1,4 +1,4 @@
-import {FETCH_LISTS, POST_LIST, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  './types';
+import {FETCH_LISTS, POST_LIST, DELETE_LIST, UPDATE_LIST, SELECT_LIST, REMOVE_SELECT_LIST} from  './types';
 
 export const fetchLists = () => (dispatch) =>{
     //console.log('fetchList action called');
@@ -46,5 +46,9 @@ export const updateList = (list) => (dispatch) => {
 
 export const selectList = (listId) => (dispatch) => {    
     dispatch({type: SELECT_LIST, payload: listId});
+}
+
+export const removeSelectedList = () => (dispatch) => {
+    dispatch({type: REMOVE_SELECT_LIST, payload: {}});
 }
 

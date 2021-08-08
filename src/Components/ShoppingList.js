@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listActionCreators } from '../state';
+import { itemActionCreators, listActionCreators } from '../state';
 import { bindActionCreators } from 'redux';
 
 import ListItem from './ListItem';
@@ -13,9 +13,10 @@ import SelectItemList from './SelectItemList';
 const ShoppingList = (props) => {    
     const listItems = useSelector(state => state.items.items.filter((item => item.listId == props.list.id))); 
     const wishLists = useSelector(state => state.lists.wishLists);
+    const didSelectList = useSelector(state => state.lists.didSelectList);
     const selectedList = useSelector(state => state.lists.selectedList);
-    const selectedListItems = useSelector(state => (selectedList == undefined) ? [] : state.items.items.filter(item => item.listId == selectedList.id ))
-    //console.log(selectedListItems);
+    const selectedListItems = useSelector(state => (selectedList == undefined) ? [] : state.items.items.filter(item => {return item.listId == selectedList.id} ))
+    console.log(selectedListItems);
 
     const [displayAddNewItemForm, setDisplayAddNewItemForm] = useState(false);
     const [displayAddItemFromListForm, setDisplayAddItemFromListForm] = useState(false);
@@ -27,8 +28,11 @@ const ShoppingList = (props) => {
     const [displayEditListForm, setDisplayEditListForm] = useState(false);    
     const [editItemId, setEditItemId] = useState(undefined);
 
+    //const [didSelectList, setDidSelectList] = useState(false);
+
     const dispatch = useDispatch();
-    const {deleteList, selec} = bindActionCreators(listActionCreators, dispatch);
+    const {deleteList, removeSelectedList} = bindActionCreators(listActionCreators, dispatch);
+    const {removeItemListData} = bindActionCreators(itemActionCreators, dispatch)
 
     const getList = () => {        
         return listItems.map((listItem, index) => (
@@ -49,6 +53,9 @@ const ShoppingList = (props) => {
         }else{
             setDisplayAddItemForm(!displayAddItemForm);
         }        
+        if(displayAddItemFromListForm) setDisplayAddItemFromListForm(false)
+        removeSelectedList();
+        removeItemListData();  
     }
 
     const handleDropDownButton = () => {
@@ -88,11 +95,16 @@ const ShoppingList = (props) => {
     const handleNewItem = () => {
         setDisplayAddNewItemForm(true);
         setDisplayAddItemFromListForm(false);
+        removeSelectedList();
+        removeItemListData();
+
+        console.log(didSelectList)
     }
 
     const handleAddItemFromList = () => {        
         setDisplayAddItemFromListForm(true);
         setDisplayAddNewItemForm(false);
+      
     }
 
     //Generate EditItemForm for the item selected
@@ -111,6 +123,8 @@ const ShoppingList = (props) => {
             handleSubmitEditItem={handleSubmitEditItem}
         />
     }
+
+
 
     return(
         <div className='WishList shadow-box container'>
@@ -151,7 +165,7 @@ const ShoppingList = (props) => {
                         : displayAddItemFromListForm? <SelectList/> 
                         : ''
                     }
-                    { selectedList != undefined ? <SelectItemList 
+                    { didSelectList ? <SelectItemList 
                         wishListId = {selectedList.id} 
                         shoppingListId = {props.list.id}
                         listItems = {selectedListItems} 

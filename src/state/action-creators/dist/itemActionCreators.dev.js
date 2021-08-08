@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setSelectItemListData = exports.deleteItem = exports.updateItem = exports.postItem = exports.fetchItems = void 0;
+exports.checkItem = exports.removeItemListData = exports.setSelectItemListData = exports.deleteItem = exports.updateItem = exports.postItem = exports.fetchItems = void 0;
 
 var _types = require("./types");
 
@@ -98,7 +98,29 @@ var setSelectItemListData = function setSelectItemListData(listId) {
       payload: listId
     });
   };
+};
+
+exports.setSelectItemListData = setSelectItemListData;
+
+var removeItemListData = function removeItemListData() {
+  return function (dispatch) {
+    dispatch({
+      type: _types.REMOVE_ITEM_LIST_DATA,
+      payload: {}
+    });
+  };
+};
+
+exports.removeItemListData = removeItemListData;
+
+var checkItem = function checkItem(itemId) {
+  return function (dispatch) {
+    dispatch({
+      type: _types.CHECK_SELECT_ITEM,
+      payload: itemId
+    });
+  };
 }; //const [selectedItems, setSelectedItems] = useState(listItems.map(item => {return {name: item.name, checked: false}}));
 
 
-exports.setSelectItemListData = setSelectItemListData;
+exports.checkItem = checkItem;

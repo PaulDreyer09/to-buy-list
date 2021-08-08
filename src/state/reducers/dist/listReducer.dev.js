@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = _default;
 
-var _listActionCreators = require("../action-creators/listActionCreators");
-
 var _types = require("../action-creators/types");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -26,7 +24,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var initialState = {
   wishLists: [],
   shoppingLists: [],
-  selectedList: undefined
+  selectedList: {},
+  didSelectList: false
 };
 
 function _default() {
@@ -131,7 +130,14 @@ function _default() {
       });
       var selectedList = state.wishLists[selectedListIndex];
       return _objectSpread({}, state, {
-        selectedList: selectedList
+        selectedList: selectedList,
+        didSelectList: true
+      });
+
+    case _types.REMOVE_SELECT_LIST:
+      return _objectSpread({}, state, {
+        selectedList: {},
+        didSelectList: false
       });
 
     default:

@@ -1,10 +1,10 @@
-import { selectList } from '../action-creators/listActionCreators';
-import {POST_LIST, FETCH_LISTS, DELETE_LIST, UPDATE_LIST, SELECT_LIST} from  '../action-creators/types';
+import {POST_LIST, FETCH_LISTS, DELETE_LIST, UPDATE_LIST, SELECT_LIST, REMOVE_SELECT_LIST} from  '../action-creators/types';
 
 const initialState = {    
     wishLists: [],
     shoppingLists: [],
-    selectedList: undefined
+    selectedList: {},
+    didSelectList: false
 }
 
 export default function(state = initialState, action){
@@ -81,7 +81,11 @@ export default function(state = initialState, action){
                 let selectedListId = action.payload
                 let selectedListIndex = state.wishLists.findIndex(list => list.id === selectedListId);
                 let selectedList = state.wishLists[selectedListIndex];
-                return {...state, selectedList: selectedList};
+
+                return {...state, selectedList: selectedList, didSelectList: true};
+
+            case REMOVE_SELECT_LIST:
+                return {...state, selectedList: {}, didSelectList: false};
         default:
             return state;
     }
