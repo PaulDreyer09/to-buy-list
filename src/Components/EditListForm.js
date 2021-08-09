@@ -5,7 +5,6 @@ import { listActionCreators } from '../state';
 
 //listType prop : 0 for WishList 1 for ShoppingList
 const EditListForm = ({list, handleCloseListEditForm}) =>{
-    const [displayListForm, setDisplayListForm] = useState(false);
     const [formName, setFormName] = useState('');
 
     const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const EditListForm = ({list, handleCloseListEditForm}) =>{
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log('submit form clicked');
-        if(formName != ''){
+        if(formName !== ''){
             list.name = formName;
             updateList(list);   
             handleCloseListEditForm();

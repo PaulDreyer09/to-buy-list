@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports["default"] = void 0;
 
 var _types = require("../action-creators/types");
 
@@ -28,7 +28,7 @@ var initialState = {
   didSelectList: false
 };
 
-function _default() {
+var _default = function _default() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -39,10 +39,10 @@ function _default() {
       var lists = action.payload; //Split Lists into wishlists and shoppinglists
 
       var wishListsData = lists.filter(function (list) {
-        return list.listType == 0;
+        return list.listType === 0;
       });
       var shoppingListsData = lists.filter(function (list) {
-        return list.listType == 1;
+        return list.listType !== 0;
       });
       return _objectSpread({}, state, {
         wishLists: wishListsData,
@@ -54,7 +54,7 @@ function _default() {
       var postList = action.payload;
       var afterPostLists = undefined; //push list to wishlists or shoppinglists depending on listType
 
-      if (postList.listType == 0) {
+      if (postList.listType === 0) {
         afterPostLists = _toConsumableArray(state.wishLists);
         afterPostLists.push(postList);
         return _objectSpread({}, state, {
@@ -75,10 +75,10 @@ function _default() {
       var listToDelete = action.payload;
       var deleteIndex = undefined;
 
-      if (listToDelete.listType == 0) {
+      if (listToDelete.listType === 0) {
         afterDeleteLists = _toConsumableArray(state.wishLists);
         deleteIndex = afterDeleteLists.findIndex(function (obj) {
-          return obj.id == listToDelete.id;
+          return obj.id === listToDelete.id;
         }); //console.log('DELETE_INDEX',deleteIndex);
 
         afterDeleteLists.splice(deleteIndex, 1);
@@ -88,7 +88,7 @@ function _default() {
       } else {
         afterDeleteLists = _toConsumableArray(state.shoppingLists);
         deleteIndex = afterDeleteLists.findIndex(function (obj) {
-          return obj.id == listToDelete.id;
+          return obj.id === listToDelete.id;
         });
         afterDeleteLists.splice(deleteIndex, 1);
         return _objectSpread({}, state, {
@@ -102,10 +102,10 @@ function _default() {
       var updatedItem = action.payload;
       var updateIndex = undefined;
 
-      if (updatedItem.listType == 0) {
+      if (updatedItem.listType === 0) {
         afterUpdateList = _toConsumableArray(state.wishLists);
         updateIndex = afterUpdateList.findIndex(function (obj) {
-          return obj.id == updatedItem.id;
+          return obj.id === updatedItem.id;
         }); //console.log('DELETE_INDEX',updateIndex);
 
         afterUpdateList.splice(updateIndex, 1, updatedItem);
@@ -115,7 +115,7 @@ function _default() {
       } else {
         afterUpdateList = _toConsumableArray(state.shoppingLists);
         updateIndex = afterUpdateList.findIndex(function (obj) {
-          return obj.id == updatedItem.id;
+          return obj.id === updatedItem.id;
         });
         afterUpdateList.splice(updateIndex, 1, updatedItem);
         return _objectSpread({}, state, {
@@ -143,4 +143,6 @@ function _default() {
     default:
       return state;
   }
-}
+};
+
+exports["default"] = _default;

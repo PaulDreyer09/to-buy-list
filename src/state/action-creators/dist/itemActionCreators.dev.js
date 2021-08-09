@@ -28,7 +28,7 @@ exports.fetchItems = fetchItems;
 
 var postItem = function postItem(newItem) {
   return function (dispatch) {
-    console.log('POST ITEM', newItem);
+    //console.log('POST ITEM', newItem);
     fetch('http://localhost:5000/listItems', {
       method: 'POST',
       headers: {
@@ -38,7 +38,6 @@ var postItem = function postItem(newItem) {
     }).then(function (res) {
       return res.json();
     }).then(function (data) {
-      console.log('post data', data);
       return dispatch({
         type: _types.POST_ITEM,
         payload: data

@@ -47,8 +47,6 @@ const AddItemForm = ({listId, formData}) => {
         setFormQuantity('1');
         setFormImportant(false);
     }
-
-    //Close
     
     return(    
         <div className='AddItemForm well'>

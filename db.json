@@ -3,50 +3,43 @@
     {
       "id": "0",
       "name": "Food",
-      "listType": "0"
+      "listType": 0
     },
     {
       "id": "1",
       "name": "Cloths",
-      "listType": "0"
+      "listType": 0
     },
     {
       "id": "2",
       "name": "Tools",
-      "listType": "0"
+      "listType": 0
     },
     {
       "id": "3",
       "name": "Games",
-      "listType": "0"
+      "listType": 0
     },
     {
-      "name": "SL 1",
+      "name": "New SL",
       "listType": 1,
       "id": "iYD7Jnc"
     }
   ],
   "listItems": [
     {
-      "id": "3",
-      "listId": "iYD7Jnc",
-      "name": "Cargo Shorts",
-      "quantity": 2,
-      "important": true
-    },
-    {
       "id": "4",
-      "listId": "2",
+      "listId": "iYD7Jnc",
       "name": "Makita Cordless SDS Drill",
       "quantity": 2,
-      "important": true
+      "important": false
     },
     {
       "id": "5",
-      "listId": "2",
+      "listId": "iYD7Jnc",
       "name": "10mm SDS Drill bit",
       "quantity": 2,
-      "important": true
+      "important": false
     },
     {
       "id": "6",
@@ -63,41 +56,6 @@
       "important": true
     },
     {
-      "listId": "iYD7Jnc",
-      "name": "Vleis",
-      "quantity": "4",
-      "important": false,
-      "id": "Fj_ehEb"
-    },
-    {
-      "name": "Apples",
-      "quantity": "5",
-      "important": false,
-      "listId": "0",
-      "id": "g6ozpi2"
-    },
-    {
-      "name": "socks",
-      "quantity": 1,
-      "important": false,
-      "listId": "iYD7Jnc",
-      "id": "0SfO95O"
-    },
-    {
-      "name": "te",
-      "quantity": 1,
-      "important": false,
-      "listId": "0",
-      "id": "Z8zq8is"
-    },
-    {
-      "name": "Shoes",
-      "quantity": 1,
-      "important": false,
-      "listId": "1",
-      "id": "oYd-vMo"
-    },
-    {
       "name": "Hemp",
       "quantity": "1",
       "important": false,
@@ -105,18 +63,32 @@
       "id": "R9_ygG0"
     },
     {
-      "name": "uu",
-      "quantity": 1,
+      "name": "Apples",
+      "quantity": "5",
       "important": false,
       "listId": "0",
-      "id": "pofmDQY"
+      "id": "eJ57AQW"
     },
     {
-      "name": "ee",
-      "quantity": 1,
+      "name": "Bananas",
+      "quantity": "1",
       "important": false,
       "listId": "0",
-      "id": "8IliJ5D"
+      "id": "NoKhsDd"
+    },
+    {
+      "name": "Lots and lots of meat",
+      "quantity": "16",
+      "important": false,
+      "listId": "0",
+      "id": "5AqXu2Z"
+    },
+    {
+      "name": "Star screwdriver",
+      "quantity": 1,
+      "important": false,
+      "listId": "2",
+      "id": "b3ZI8v5"
     }
   ]
 }

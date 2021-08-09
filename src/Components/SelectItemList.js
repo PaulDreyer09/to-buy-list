@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { itemActionCreators } from '../state';
-import { useDispatch } from 'react-redux';
 
-const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
+
+
+const SelectItemList = ({shoppingListId, listItems, resetForm, resetFormData}) => {
     const dispatch = useDispatch();
 
-    const state = useSelector(state => state);
     const selectedItems = useSelector(state => state.items.selectItemsList)
-    const {updateItem, checkItem} = bindActionCreators(itemActionCreators, dispatch);
+    const {updateItem, checkItem, } = bindActionCreators(itemActionCreators, dispatch);
 
     console.log(selectedItems);
 
@@ -19,13 +19,11 @@ const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
         const item = selectedItems[index];
         console.log('checked item ' + item.checked)
         checkItem(item.data.id)
-        // newCheckedItems[index] = {id: item.id, name: item.name, checked: !item.checked}
-        // setCheckedItems(newCheckedItems);
     }
 
     const onChange = (event) => {        
         let index = event.target.value;
-        let selectedItem = listItems[index].id;
+        
         handleCheckItem(index)
     }
 
@@ -40,10 +38,13 @@ const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const updateItemsList = selectedItems.filter((item, index) => {
-            const result = item.id === selectedItems[index].data.id && selectedItems[index].checked;
+            const result = item.checked;
             return result;
-        })
+        }).map(item => item.data);
+        console.log(updateItemsList);
         updateItems(updateItemsList);
+        resetFormData();
+        resetForm();
     }
 
     return (
@@ -53,14 +54,14 @@ const SelectItemList = ({shoppingListId, listItems, checkItems}) => {
                     {listItems.map((item, index) => 
                     {
                         return <li key={index}>
-                            <input   
+                            <label><input   
                             index={index} 
                             type="checkbox" 
                             value={index} 
                             checked={
                                 selectedItems[index].checked} 
-                            onChange={onChange}/>
-                        {item.name}
+                            onChange={onChange}/>{item.name}</label>
+                        
                         </li>
                     })}
                 </ul>

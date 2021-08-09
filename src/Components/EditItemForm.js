@@ -41,9 +41,7 @@ const EditItemForm = ({itemId, listId, formData, handleSubmitEditItem}) => {
             listId: listId,
         };
 
-        console.log('Update',item)
-
-        if(item != undefined){
+        if(item !== undefined){
             updateItem(item);
         }
         else{

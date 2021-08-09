@@ -137,6 +137,14 @@ h1 {
   margin: 0;
 }
 
+.addFromButtons > button {
+  width: 47.5%;
+}
+
+.addFromButtons :nth-child(1) {
+  margin-right: 5%;
+}
+
 .WishList, .ShoppingList {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -191,6 +199,7 @@ h1 {
   text-align: left;
   padding: 5px 0;
   margin: 0 1em 0 1em;
+  min-height: 25px;
 }
 
 .ListItem .line {
@@ -210,5 +219,22 @@ h1 {
 
 .ListItem a {
   color: white;
+}
+
+.SelectItemList input {
+  margin-right: 1em;
+}
+
+.SelectItemList li {
+  list-style-type: none;
+  text-align: left;
+  margin-top: 5px;
+  border-radius: 15px;
+  background-color: #8085a1;
+}
+
+.SelectItemList label {
+  width: 100%;
+  padding: 5px 1em;
 }
 /*# sourceMappingURL=index.css.map */

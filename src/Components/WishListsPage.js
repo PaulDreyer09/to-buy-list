@@ -10,9 +10,6 @@ import AddListForm from './AddListForm';
 const WishListsPage = (props) => {   
     const state = useSelector(state => state.lists.wishLists);   
 
-    //const dispatch = useDispatch();
-    //const {fetchLists} = bindActionCreators(listActionCreators,dispatch );
-    console.log(state)
     const getLists = () => {
         let component = '';
         if(state.length > 0){            

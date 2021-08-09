@@ -7,7 +7,7 @@ const initialState = {
     didSelectList: false
 }
 
-export default function(state = initialState, action){
+export default (state = initialState, action) => {
     switch (action.type) {
         //Payload: array of list objects
         case FETCH_LISTS: 
@@ -15,8 +15,8 @@ export default function(state = initialState, action){
             let lists = action.payload;
 
             //Split Lists into wishlists and shoppinglists
-            let wishListsData = lists.filter((list) => list.listType == 0);
-            let shoppingListsData = lists.filter((list) => list.listType == 1);
+            let wishListsData = lists.filter((list) => list.listType === 0);
+            let shoppingListsData = lists.filter((list) => list.listType !== 0);
             return {...state, wishLists: wishListsData, shoppingLists: shoppingListsData};
 
         //Payload: list object
@@ -25,7 +25,7 @@ export default function(state = initialState, action){
             let afterPostLists = undefined;
 
             //push list to wishlists or shoppinglists depending on listType
-            if(postList.listType == 0){
+            if(postList.listType === 0){
                 afterPostLists = [...state.wishLists];
                 afterPostLists.push(postList);
                 return {...state, wishLists: afterPostLists}
@@ -43,16 +43,16 @@ export default function(state = initialState, action){
             let deleteIndex = undefined;
             
 
-            if(listToDelete.listType == 0){
+            if(listToDelete.listType === 0){
                 afterDeleteLists = [...state.wishLists];
-                deleteIndex = afterDeleteLists.findIndex((obj) => obj.id == listToDelete.id);
+                deleteIndex = afterDeleteLists.findIndex((obj) => obj.id === listToDelete.id);
                 //console.log('DELETE_INDEX',deleteIndex);
                 afterDeleteLists.splice(deleteIndex, 1);
                 return {...state, wishLists: afterDeleteLists};
             }
             else{
                 afterDeleteLists = [...state.shoppingLists];
-                deleteIndex = afterDeleteLists.findIndex((obj) => obj.id == listToDelete.id);
+                deleteIndex = afterDeleteLists.findIndex((obj) => obj.id === listToDelete.id);
                 afterDeleteLists.splice(deleteIndex, 1);
                 return {...state, shoppingLists: afterDeleteLists};
             }
@@ -63,16 +63,16 @@ export default function(state = initialState, action){
             let updatedItem = action.payload;
             let updateIndex = undefined;
             
-            if(updatedItem.listType == 0){
+            if(updatedItem.listType === 0){
                 afterUpdateList = [...state.wishLists];
-                updateIndex = afterUpdateList.findIndex((obj) => obj.id == updatedItem.id);
+                updateIndex = afterUpdateList.findIndex((obj) => obj.id === updatedItem.id);
                 //console.log('DELETE_INDEX',updateIndex);
                 afterUpdateList.splice(updateIndex, 1, updatedItem);
                 return {...state, wishLists: afterUpdateList};
             }
             else{
                 afterUpdateList = [...state.shoppingLists];
-                updateIndex = afterUpdateList.findIndex((obj) => obj.id == updatedItem.id);
+                updateIndex = afterUpdateList.findIndex((obj) => obj.id === updatedItem.id);
                 afterUpdateList.splice(updateIndex, 1, updatedItem);
                 return {...state, shoppingLists: afterUpdateList};
             }

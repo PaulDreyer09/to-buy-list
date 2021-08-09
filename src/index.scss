@@ -129,6 +129,17 @@ body {
     }
 
   }
+
+
+    .addFromButtons {
+      > button{
+        width:47.5%;
+      }
+      :nth-child(1){
+        margin-right: 5%
+      }
+    }
+  
   
   .WishList, .ShoppingList{
     box-sizing: border-box;
@@ -156,7 +167,7 @@ body {
       background-color: #444;
       box-shadow: 1px 1px 3px #aaa;
     }
-
+    
     .listHeader{
       .dropDownButton{
         font-size: 130%;
@@ -180,9 +191,11 @@ body {
 
   .ListItem{
     display: block;
+
     text-align: left;
     padding: 5px 0;  
     margin: 0 1em 0 1em;
+    min-height: 25px;
     
     .line{
         min-height: 1px;
@@ -200,5 +213,24 @@ body {
 
     a{
         color: white;
+    }
+  }
+  .SelectItemList {
+    input{
+      margin-right: 1em;
+    }
+    li{
+      list-style-type: none;
+      text-align: left;
+      margin-top: 5px;
+      border-radius: 15px;
+      background-color: #8085a1;
+
+    }
+    label{
+      width: 100%;
+      padding: 5px 1em;
+
+
     }
   }

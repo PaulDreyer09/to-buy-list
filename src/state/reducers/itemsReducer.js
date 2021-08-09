@@ -14,15 +14,14 @@ export default (state = initialState, action) => {
         case POST_ITEM:
             let createdItem = action.payload;
             let listAfterPost =  [...state.items];
-            listAfterPost.push(createdItem) ;
-            console.log("created item reducer", action);      
+            listAfterPost.push(createdItem);
 
             return {...state, items: listAfterPost}
         //Payload: listItem with needed changes applied to it
         case UPDATE_ITEM:
             //initialise new state data
             let newItemsList = [...state.items];
-            let index = newItemsList.findIndex((element) => element.id == action.payload.id);
+            let index = newItemsList.findIndex((element) => element.id === action.payload.id);
 
             newItemsList[index] = action.payload;
         

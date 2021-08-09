@@ -11,28 +11,24 @@ import SelectList from './SelectList';
 import SelectItemList from './SelectItemList';
 
 const ShoppingList = (props) => {    
-    const listItems = useSelector(state => state.items.items.filter((item => item.listId == props.list.id))); 
-    const wishLists = useSelector(state => state.lists.wishLists);
+    const listItems = useSelector(state => state.items.items.filter((item => item.listId === props.list.id))); 
     const didSelectList = useSelector(state => state.lists.didSelectList);
     const selectedList = useSelector(state => state.lists.selectedList);
-    const selectedListItems = useSelector(state => (selectedList == undefined) ? [] : state.items.items.filter(item => {return item.listId == selectedList.id} ))
-    console.log(selectedListItems);
+    const selectedListItems = useSelector(state => (selectedList === {}) ? [] : state.items.items.filter(item => {return item.listId == selectedList.id} ))
 
     const [displayAddNewItemForm, setDisplayAddNewItemForm] = useState(false);
     const [displayAddItemFromListForm, setDisplayAddItemFromListForm] = useState(false);
 
     const [displayAddItemForm, setDisplayAddItemForm] = useState(false);    
-    const [displayListItems, setDisplayListItems] = useState(true);
+    const [displayListItems, setDisplayListItems] = useState(false);
 
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
     const [displayEditListForm, setDisplayEditListForm] = useState(false);    
     const [editItemId, setEditItemId] = useState(undefined);
 
-    //const [didSelectList, setDidSelectList] = useState(false);
-
     const dispatch = useDispatch();
     const {deleteList, removeSelectedList} = bindActionCreators(listActionCreators, dispatch);
-    const {removeItemListData} = bindActionCreators(itemActionCreators, dispatch)
+    const {deleteItem, removeItemListData} = bindActionCreators(itemActionCreators, dispatch)
 
     const getList = () => {        
         return listItems.map((listItem, index) => (
@@ -46,6 +42,20 @@ const ShoppingList = (props) => {
             />))
     }
 
+    
+    //Reset the data of the selectList and selectItemList
+    const handleResetFormData = () => {
+        removeSelectedList();
+        removeItemListData();
+    }
+
+    //Turns off the display for both form types
+    const handleResetForm = () => {
+        setDisplayAddItemFromListForm(false);
+        setDisplayAddNewItemForm(false);
+    }
+
+
     //toggle displayAddForm
     const handleAddItemButton = () => {
         if(displayEditItemForm){
@@ -54,8 +64,7 @@ const ShoppingList = (props) => {
             setDisplayAddItemForm(!displayAddItemForm);
         }        
         if(displayAddItemFromListForm) setDisplayAddItemFromListForm(false)
-        removeSelectedList();
-        removeItemListData();  
+        handleResetFormData();
     }
 
     const handleDropDownButton = () => {
@@ -95,8 +104,7 @@ const ShoppingList = (props) => {
     const handleNewItem = () => {
         setDisplayAddNewItemForm(true);
         setDisplayAddItemFromListForm(false);
-        removeSelectedList();
-        removeItemListData();
+        handleResetFormData();
 
         console.log(didSelectList)
     }
@@ -107,9 +115,22 @@ const ShoppingList = (props) => {
       
     }
 
+    const handleCompleteShopping = () => {
+        if(window.confirm('Are you sure you are complete with this list and want to remove the items?')){
+            console.log('Removing items from shopping list')
+            listItems.forEach(item => {
+                console.log('Delete item ', item.id);
+                deleteItem(item.id);
+            });
+        }else{
+            console.log('Shopping list completion aborted')
+        }
+
+    }
+
     //Generate EditItemForm for the item selected
     const getEditItemForm = () => {
-        const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
+        const itemIndex = listItems.findIndex((obj) => obj.id === editItemId);
         const item = listItems[itemIndex];
         
         return <EditItemForm 
@@ -123,6 +144,39 @@ const ShoppingList = (props) => {
             handleSubmitEditItem={handleSubmitEditItem}
         />
     }
+
+    const getAddItemForm = () =>{
+        return <AddItemForm 
+            listId={props.list.id}
+            formData={
+            {name : '', 
+            quantity : 1, 
+            important : false}}                    
+        /> 
+    }
+
+    const getSelectList = () => {
+        return <SelectList resetForm={handleResetForm} resetFormData={handleResetFormData}/>;
+    }
+
+    const getEditListForm = () => {
+        return <EditListForm 
+            list={props.list} 
+            handleCloseListEditForm={handleCloseListEditForm}
+        />
+    }
+
+    const getSelectItemList = () => {
+        return <SelectItemList  
+            resetForm={handleResetForm} 
+            resetFormData={handleResetFormData}
+            wishListId = {selectedList.id} 
+            shoppingListId = {props.list.id}
+            listItems = {selectedListItems} 
+            checkItems = {selectedListItems.map(item => {return {name: item.name, checked: false}})}
+        />  
+    }
+    
 
 
 
@@ -138,44 +192,24 @@ const ShoppingList = (props) => {
 
                 </div>
             </div>
+
             <div className='form-container'>
-            
-            {//Display form to edit List name
-                displayEditListForm? 
-                <EditListForm 
-                    list={props.list} 
-                    handleCloseListEditForm={handleCloseListEditForm}
-                /> : ''
-            }  
+            { displayEditListForm? getEditListForm(): ''}  
             {
                 //Display a form to add a new item only after Add Item is clicked
                 //Also close all other forms                
                 displayAddItemForm?
-                <div>
-                    <button onClick={handleAddItemFromList}>From WishList</button>
-                    <button onClick={handleNewItem}>New Item</button>
-                    {displayAddNewItemForm ?
-                        <AddItemForm 
-                            listId={props.list.id}
-                            formData={
-                            {name : '', 
-                            quantity : 1, 
-                            important : false}}                    
-                        /> 
-                        : displayAddItemFromListForm? <SelectList/> 
-                        : ''
+                <div className='addFromButtons'>
+                    <button className='btn btn-dark btnAddFrom' onClick={handleAddItemFromList}>From WishList</button>
+                    <button className='btn btn-dark btnAddFrom' onClick={handleNewItem}>New Item</button>
+                    {
+                        displayAddNewItemForm ? getAddItemForm()
+                        : displayAddItemFromListForm?  getSelectList() : '' 
                     }
-                    { didSelectList ? <SelectItemList 
-                        wishListId = {selectedList.id} 
-                        shoppingListId = {props.list.id}
-                        listItems = {selectedListItems} 
-                        checkItems = {selectedListItems.map(item => {return {name: item.name, checked: false}})}/>  
-                        : ''
-                    }
+                    { didSelectList ? getSelectItemList() : ''}
                 </div>
                 :displayEditItemForm?
-                getEditItemForm(): ''                                  
-               
+                getEditItemForm(): '' 
             }
             </div>
             
@@ -184,6 +218,7 @@ const ShoppingList = (props) => {
                 listItems.length > 0 ? 
                 <div className='listContent'>
                     {getList()}
+                    <button className='btn btn-dark' onClick={handleCompleteShopping}>Completed Shopping</button>
                 </div>
                 : 'No items to show') : ''
             }   

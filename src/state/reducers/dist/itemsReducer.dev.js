@@ -50,7 +50,6 @@ var _default = function _default() {
       var listAfterPost = _toConsumableArray(state.items);
 
       listAfterPost.push(createdItem);
-      console.log("created item reducer", action);
       return _objectSpread({}, state, {
         items: listAfterPost
       });
@@ -61,7 +60,7 @@ var _default = function _default() {
       var newItemsList = _toConsumableArray(state.items);
 
       var index = newItemsList.findIndex(function (element) {
-        return element.id == action.payload.id;
+        return element.id === action.payload.id;
       });
       newItemsList[index] = action.payload;
       return _objectSpread({}, state, {

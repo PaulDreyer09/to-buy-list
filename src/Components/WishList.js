@@ -12,7 +12,7 @@ const WishList = (props) => {
     const state = useSelector(state => state.items); 
 
     const [displayAddForm, setDisplayAddForm] = useState(false);    
-    const [displayListItems, setDisplayListItems] = useState(true);
+    const [displayListItems, setDisplayListItems] = useState(false);
     const [displayEditItemForm, setDisplayEditItemForm] = useState(false);
     const [displayEditListForm, setDisplayEditListForm] = useState(false);
     const [editItemId, setEditItemId] = useState(undefined);
@@ -55,7 +55,6 @@ const WishList = (props) => {
 
     const handleDeleteListButton = () => {
         if(listItems.length === 0){
-            console.log('DELETE LIST BUTTON PRESSED ON LIST', props.list.id);
             deleteList(props.list);
         }
         else{
@@ -83,7 +82,6 @@ const WishList = (props) => {
     const getEditItemForm = () => {
         const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
         const item = listItems[itemIndex];
-        console.log('EDIT ITEM',item)
         
         return <EditItemForm 
             listId={props.list.id}

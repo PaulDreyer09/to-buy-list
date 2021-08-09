@@ -13,7 +13,7 @@ export const fetchItems = () => (dispatch) => {
 //POST ITEM
 //Parameter: created item object
 export const postItem = (newItem) => (dispatch) => {
-    console.log('POST ITEM', newItem);
+    //console.log('POST ITEM', newItem);
     fetch('http://localhost:5000/listItems', {
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
@@ -21,7 +21,6 @@ export const postItem = (newItem) => (dispatch) => {
     })
     .then(res => res.json())
     .then(data => {
-        console.log('post data',data);
         return dispatch({type: POST_ITEM, payload: data})
     })
 }
@@ -37,8 +36,6 @@ export const updateItem = (item) => (dispatch) => {
     .then(res => res.json)
     .then(data => dispatch({type: UPDATE_ITEM, payload: item}))
 }
-
-
 
 //DELETE ITEM
 //Parameter: item id
