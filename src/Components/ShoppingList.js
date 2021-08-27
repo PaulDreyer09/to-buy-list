@@ -14,7 +14,7 @@ const ShoppingList = (props) => {
     const listItems = useSelector(state => state.items.items.filter((item => item.listId === props.list.id))); 
     const didSelectList = useSelector(state => state.lists.didSelectList);
     const selectedList = useSelector(state => state.lists.selectedList);
-    const selectedListItems = useSelector(state => (selectedList === {}) ? [] : state.items.items.filter(item => {return item.listId == selectedList.id} ))
+    const selectedListItems = useSelector(state => (selectedList === {}) ? [] : state.items.items.filter(item => {return item.listId === selectedList.id} ))
 
     const [displayAddNewItemForm, setDisplayAddNewItemForm] = useState(false);
     const [displayAddItemFromListForm, setDisplayAddItemFromListForm] = useState(false);
@@ -183,7 +183,7 @@ const ShoppingList = (props) => {
     return(
         <div className='WishList shadow-box container'>
             <div className='listHeader row'>      
-                <h4 className='col-11'>{props.list.name}</h4>
+                <h4 className='col-11 button' onClick={handleDropDownButton}>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
                     <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddItemForm | displayEditItemForm ? 'Close' : 'Add Item'}</i></a>|

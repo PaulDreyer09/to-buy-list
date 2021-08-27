@@ -56,13 +56,6 @@
       "important": true
     },
     {
-      "name": "Hemp",
-      "quantity": "1",
-      "important": false,
-      "listId": "1",
-      "id": "R9_ygG0"
-    },
-    {
       "name": "Apples",
       "quantity": "5",
       "important": false,
@@ -89,6 +82,27 @@
       "important": false,
       "listId": "2",
       "id": "b3ZI8v5"
+    },
+    {
+      "name": "More fruit",
+      "quantity": 1,
+      "important": false,
+      "listId": "0",
+      "id": "wsOP2Ey"
+    },
+    {
+      "name": "Shirt",
+      "quantity": 1,
+      "important": false,
+      "listId": "1",
+      "id": "5TSCKFg"
+    },
+    {
+      "name": "Pants",
+      "quantity": "4",
+      "important": false,
+      "listId": "1",
+      "id": "iZj99Kr"
     }
   ]
 }

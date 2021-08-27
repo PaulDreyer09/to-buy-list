@@ -9,6 +9,11 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  footer{
+    text-align: center;
+    
+  }
   
   .App {
     margin: 0 auto;
@@ -127,18 +132,13 @@ body {
         margin: 0;
       }
     }
-
   }
 
-
-    .addFromButtons {
-      > button{
-        width:47.5%;
-      }
-      :nth-child(1){
-        margin-right: 5%
-      }
+  .addFromButtons {
+    > button{
+      width:47.5%;      
     }
+  }
   
   
   .WishList, .ShoppingList{

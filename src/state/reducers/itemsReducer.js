@@ -1,4 +1,3 @@
-import SelectItemList from '../../Components/SelectItemList';
 import {FETCH_ITEMS, POST_ITEM, UPDATE_ITEM, DELETE_ITEM, SELECT_ITEM_LIST_DATA, REMOVE_ITEM_LIST_DATA, CHECK_SELECT_ITEM} from '../action-creators/types';
 
 const initialState = {items: [], selectItemsList: []};
@@ -30,7 +29,7 @@ export default (state = initialState, action) => {
         case DELETE_ITEM:
             //delete item from list            
             let deleteItemsList = [...state.items]
-            const itemIndex = deleteItemsList.findIndex((item) => item.id == action.payload);
+            const itemIndex = deleteItemsList.findIndex((item) => item.id === action.payload);
 
             if(itemIndex > -1){
                 deleteItemsList.splice(itemIndex, 1);
@@ -42,7 +41,7 @@ export default (state = initialState, action) => {
         //Payload: list id to select as the selectItemsList
         //Select all items for the corresponding list and add a checked value for checking if the item is checked in a select list
         case SELECT_ITEM_LIST_DATA: 
-            let selectItemList = state.items.filter((item) => item.listId == action.payload);
+            let selectItemList = state.items.filter((item) => item.listId === action.payload);
             selectItemList = selectItemList.map((item) => {return {data: item, checked: false}});
             return{...state, selectItemsList: selectItemList};
 

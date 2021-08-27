@@ -9,6 +9,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+footer {
+  text-align: center;
+}
+
 .App {
   margin: 0 auto;
   text-align: center;
@@ -139,10 +143,6 @@ h1 {
 
 .addFromButtons > button {
   width: 47.5%;
-}
-
-.addFromButtons :nth-child(1) {
-  margin-right: 5%;
 }
 
 .WishList, .ShoppingList {

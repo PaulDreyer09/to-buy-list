@@ -5,11 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _SelectItemList = _interopRequireDefault(require("../../Components/SelectItemList"));
-
 var _types = require("../action-creators/types");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -73,7 +69,7 @@ var _default = function _default() {
       var deleteItemsList = _toConsumableArray(state.items);
 
       var itemIndex = deleteItemsList.findIndex(function (item) {
-        return item.id == action.payload;
+        return item.id === action.payload;
       });
 
       if (itemIndex > -1) {
@@ -89,7 +85,7 @@ var _default = function _default() {
 
     case _types.SELECT_ITEM_LIST_DATA:
       var selectItemList = state.items.filter(function (item) {
-        return item.listId == action.payload;
+        return item.listId === action.payload;
       });
       selectItemList = selectItemList.map(function (item) {
         return {

@@ -20,7 +20,7 @@ const WishList = (props) => {
     const dispatch = useDispatch();
     const {deleteList} = bindActionCreators(listActionCreators, dispatch);
 
-    const listItems = state.items.filter((item => item.listId == props.list.id));
+    const listItems = state.items.filter((item => item.listId === props.list.id));
 
     const getList = () => {        
         return listItems.map((listItem, index) => (
@@ -80,7 +80,7 @@ const WishList = (props) => {
 
     //Generate EditItemForm for the item selected
     const getEditItemForm = () => {
-        const itemIndex = listItems.findIndex((obj) => obj.id == editItemId);
+        const itemIndex = listItems.findIndex((obj) => obj.id === editItemId);
         const item = listItems[itemIndex];
         
         return <EditItemForm 
@@ -100,7 +100,7 @@ const WishList = (props) => {
             <div className='listHeader row'>
                                   
                 
-                <h4 className='col-11'>{props.list.name}</h4>
+                <h4 className='col-11 button' onClick={handleDropDownButton}>{props.list.name}</h4>
                 <a className='button' onClick={handleDropDownButton}><i className={`fa ${displayListItems ? 'fa-angle-down' : 'fa-angle-up'} col-1 button dropDownButton`}></i></a>
                 <div className='listOptions'>
                     <a onClick={handleAddItemButton}><i className='fa fa-plus button listOption'> {displayAddForm | displayEditItemForm ? 'Close' : 'Add Item'}</i></a>|
