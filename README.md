@@ -10,15 +10,18 @@ This app is a react redux shopping list app which you use first to create a wish
 
 # Setup
 
-## Step 1: Starting json server
+## Starting json server
 This app uses a db.json file to save json data for the shopping/wishlists and the items within those lists
 1) Open your console and navigate to the project folder or build folder
 2) Start the database server with the command "npm run server"
 
-## Step 2: Starting runtime server
+## Starting runtime server
 1) Open your console and navigate to the project folder or build folder
 2) Start the runtime server with the command "npm start"
 3) The app will be accessable from https://localhost:5000
+
+## Possible Error
+If the console shows an error about react-scripts you will need to run npm install to prevent this from continuing
 
 # App usage
 
