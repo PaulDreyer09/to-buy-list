@@ -17,11 +17,9 @@ This app uses a db.json file to save json data for the shopping/wishlists and th
 
 ## Starting runtime server
 1) Open your console and navigate to the project folder or build folder
+2) Run the command "npm install" and wait for the installation to finish
 2) Start the runtime server with the command "npm start"
 3) The app will be accessable from https://localhost:5000
-
-## Possible Error
-If the console shows an error about react-scripts you will need to run npm install to prevent this from continuing
 
 # App usage
 
