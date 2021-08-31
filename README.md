@@ -10,6 +10,8 @@ This app is a react redux shopping list app which you use first to create a wish
 
 # Setup
 
+Make sure you have the latest version of node package manager installed beforehand
+
 ## Starting json server
 This app uses a db.json file to save json data for the shopping/wishlists and the items within those lists
 1) Open your console and navigate to the project folder or build folder
